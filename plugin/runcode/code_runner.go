@@ -12,7 +12,7 @@ import (
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
 )
 
-var ro = runoob.NewRunOOB("b6365362a90ac2ac7098ba52c13e352b")
+var ro = runoob.NewRunOOB("066417defb80d038228de76ec581a50a")
 
 func init() {
 	nano.Register("runcode", &ctrl.Options[*nano.Ctx]{
@@ -26,31 +26,37 @@ func init() {
 			"JavaScript || TypeScript || PHP || Shell \n" +
 			"Kotlin  || Rust || Erlang || Ruby || Swift \n" +
 			"R || VB || Py2 || Perl || Pascal || Scala",
-	}).ApplySingle(ctxext.DefaultSingle).OnMessageRegex(`^>runcode(raw)?\s(.+?)\s([\s\S]+)$`).SetBlock(true).Limit(ctxext.LimitByUser).
+	}).ApplySingle(ctxext.DefaultSingle).OnMessageRegex(`^&gt;runcode(raw)?\s(.+?)\s([\s\S]+)$`).SetBlock(true).Limit(ctxext.LimitByUser).
 		Handle(func(ctx *nano.Ctx) {
 			israw := ctx.State["regex_matched"].([]string)[1] != ""
 			language := ctx.State["regex_matched"].([]string)[2]
 			language = strings.ToLower(language)
 			if _, exist := runoob.LangTable[language]; !exist {
 				// 不支持语言
-				_, _ = ctx.SendPlainMessage(false, "> "+ctx.Message.Author.Username+"\n语言不是受支持的编程语种呢~")
+				_, _ = ctx.SendPlainMessage(false, nano.MessageEscape("> "+ctx.Message.Author.Username+"\n语言不是受支持的编程语种呢~"))
 			} else {
 				// 执行运行
 				block := ctx.State["regex_matched"].([]string)[3]
 				switch block {
 				case "help":
-					_, _ = ctx.SendPlainMessage(false, "> "+ctx.Message.Author.Username+"  "+language+"-template:\n>runcode "+language+"\n"+runoob.Templates[language])
+					_, err := ctx.SendPlainMessage(false, nano.MessageEscape("> "+ctx.Message.Author.Username+"  "+language+"-template:\n>runcode "+language+"\n"+runoob.Templates[language]))
+					if err != nil {
+						_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
+					}
 				default:
 					output, err := ro.Run(block, language, "")
 					if err != nil {
-						output = "ERROR:\n" + err.Error()
+						output = "ERROR:\n" + nano.MessageEscape(err.Error())
 					}
 					output = cutTooLong(strings.Trim(output, "\n"))
 					if israw {
-						_, _ = ctx.SendPlainMessage(false, output)
+						_, err = ctx.SendPlainMessage(false, output)
 					} else {
 						head := "> " + ctx.Message.Author.Username + "\n"
-						_, _ = ctx.SendPlainMessage(false, head+output)
+						_, err = ctx.SendPlainMessage(false, nano.MessageEscape(head+output))
+					}
+					if err != nil {
+						_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 					}
 				}
 			}

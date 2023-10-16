@@ -34,8 +34,9 @@ func main() {
 	appid := flag.String("a", "", "qq appid")
 	secret := flag.String("s", "", "qq secret")
 	debug := flag.Bool("d", false, "enable debug-level log output")
-	timeout := flag.Int("T", 60, "timeout (s)")
+	timeout := flag.Int("T", 60, "api timeout (s)")
 	help := flag.Bool("h", false, "print this help")
+	sandbox := flag.Bool("b", false, "run in sandbox api")
 	flag.Parse()
 	if *help {
 		fmt.Println("Usage:")
@@ -54,6 +55,10 @@ func main() {
 			continue
 		}
 		sus = append(sus, s)
+	}
+
+	if *sandbox {
+		nano.OpenAPI = nano.SandboxAPI
 	}
 
 	nano.OnMessageCommandGroup([]string{"help", "帮助", "menu", "菜单"}, nano.OnlyToMe).SetBlock(true).

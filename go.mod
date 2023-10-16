@@ -3,12 +3,12 @@ module github.com/FloatTech/NanoBot-Plugin
 go 1.20
 
 require (
-	github.com/FloatTech/AnimeAPI v1.6.1-0.20230207081411-573533b18194
+	github.com/FloatTech/AnimeAPI v1.6.1-0.20231016040616-78f012eba395
 	github.com/FloatTech/floatbox v0.0.0-20230827160415-f0865337a824
 	github.com/FloatTech/gg v1.1.2
 	github.com/FloatTech/imgfactory v0.2.1
 	github.com/FloatTech/zbpctrl v1.5.3-0.20230130095145-714ad318cd52
-	github.com/fumiama/NanoBot v0.0.0-20231015152604-ce34c996ef31
+	github.com/fumiama/NanoBot v0.0.0-20231016033425-415bd574f189
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
@@ -17,7 +17,7 @@ require (
 )
 
 require (
-	github.com/FloatTech/sqlite v1.5.7 // indirect
+	github.com/FloatTech/sqlite v1.6.2 // indirect
 	github.com/FloatTech/ttl v0.0.0-20220715042055-15612be72f5b // indirect
 	github.com/RomiChan/syncx v0.0.0-20221202055724-5f842c53020e // indirect
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5 // indirect
