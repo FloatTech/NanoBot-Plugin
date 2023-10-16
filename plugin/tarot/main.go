@@ -178,7 +178,7 @@ func init() {
 				}
 				process.SleepAbout1sTo2s()
 			}
-			_, err = ctx.SendImage("file:///"+file.BOTPATH+"/"+imgpath, false, "\n", match, "的含义是~\n『正位』:", info.Description, "\n『逆位』:", info.ReverseDescription)
+			_, err = ctx.SendImage("file:///"+file.BOTPATH+"/"+imgpath, false, match, "的含义是~\n『正位』:", info.Description, "\n『逆位』:", info.ReverseDescription)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}
