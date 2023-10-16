@@ -8,7 +8,7 @@ require (
 	github.com/FloatTech/gg v1.1.2
 	github.com/FloatTech/imgfactory v0.2.1
 	github.com/FloatTech/zbpctrl v1.5.3-0.20230130095145-714ad318cd52
-	github.com/fumiama/NanoBot v0.0.0-20231016033425-415bd574f189
+	github.com/fumiama/NanoBot v0.0.0-20231016044029-ad58c90c7e2d
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0

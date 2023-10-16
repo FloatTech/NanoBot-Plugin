@@ -23,8 +23,8 @@ github.com/disintegration/imaging v1.6.2 h1:w1LecBlG2Lnp8B3jk5zSuNqd7b4DXhcjwek1
 github.com/disintegration/imaging v1.6.2/go.mod h1:44/5580QXChDfwIclfc/PCwrr44amcmDAg8hxG0Ewe4=
 github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 h1:BBade+JlV/f7JstZ4pitd4tHhpN+w+6I+LyOS7B4fyU=
 github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4/go.mod h1:H7chHJglrhPPzetLdzBleF8d22WYOv7UM/lEKYiwlKM=
-github.com/fumiama/NanoBot v0.0.0-20231016033425-415bd574f189 h1:BOw7aBHUfNP6m+F8c8qY+mzElp2tRuRVsFr8+efwjuE=
-github.com/fumiama/NanoBot v0.0.0-20231016033425-415bd574f189/go.mod h1:bWsAyGZKPf8jSYRArLUiGN3bLCzRQzI2tf31Ps9TRjw=
+github.com/fumiama/NanoBot v0.0.0-20231016044029-ad58c90c7e2d h1:hqrC6fSKoYckXEBx0qCM0tx/sVX+rpbdsFlXYT7wrH8=
+github.com/fumiama/NanoBot v0.0.0-20231016044029-ad58c90c7e2d/go.mod h1:bWsAyGZKPf8jSYRArLUiGN3bLCzRQzI2tf31Ps9TRjw=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b h1:Zt3pFQditAdWTHCOVkiloc9ZauBoWrb37guFV4iIRvE=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/fumiama/cron v1.3.0 h1:ZWlwuexF+HQHl3cYytEE5HNwD99q+3vNZF1GrEiXCFo=
