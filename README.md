@@ -87,6 +87,17 @@ nanobot [-Tadhst] ID1 ID2 ...
 </details>
 
 <details>
+  <summary>程序员做饭指南</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/dish"`
+
+  - [x] 怎么做[xxx] | 烹饪[xxx]
+  
+  - [x] 随机菜谱 | 随便做点菜
+
+</details>
+
+<details>
   <summary>合成emoji</summary>
 
   `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/emojimix"`
