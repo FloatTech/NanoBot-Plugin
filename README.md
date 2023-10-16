@@ -151,7 +151,7 @@ nanobot [-Tadhst] ID1 ID2 ...
 </details>
 
 <details>
-  <summary>在线代码运行</summary>
+  <summary>签到</summary>
 
   `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/score"`
 
@@ -160,6 +160,26 @@ nanobot [-Tadhst] ID1 ID2 ...
   - [x] 获得签到背景
 
   - [x] 查看等级排名
+
+</details>
+
+<details>
+  <summary>自检</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/status"`
+
+  - [x] [检查身体 | 自检 | 启动自检 | 系统状态]
+
+</details>
+
+<details>
+  <summary>塔罗牌</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/tarot"`
+
+  - [x] 抽[塔罗牌|大阿卡纳|小阿卡纳]
+
+  - [x] 解塔罗牌[牌名]
 
 </details>
 

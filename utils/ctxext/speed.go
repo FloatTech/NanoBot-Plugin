@@ -53,40 +53,33 @@ func SetDefaultLimiterManagerParam(interval time.Duration, burst int) {
 //
 //	按 发送者 限制
 func LimitByUser(ctx *nano.Ctx) *rate.Limiter {
-	switch msg := ctx.Value.(type) {
-	case *nano.Message:
+	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.Author.ID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
-	default:
-		return defaultLimiterManager.Load(0)
 	}
-
+	return defaultLimiterManager.Load(0)
 }
 
 // LimitByGroup 默认限速器 每 10s 5次触发
 //
 //	按 guild 限制
 func LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
-	switch msg := ctx.Value.(type) {
-	case *nano.Message:
+	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.GuildID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
-	default:
-		return defaultLimiterManager.Load(0)
 	}
+	return defaultLimiterManager.Load(0)
 }
 
 // LimitByChannel 默认限速器 每 10s 5次触发
 //
 //	按 channel 限制
 func LimitByChannel(ctx *nano.Ctx) *rate.Limiter {
-	switch msg := ctx.Value.(type) {
-	case *nano.Message:
+	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.ChannelID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
-	default:
-		return defaultLimiterManager.Load(0)
 	}
+	return defaultLimiterManager.Load(0)
 }
 
 // LimiterManager 自定义限速器管理
@@ -104,8 +97,7 @@ func NewLimiterManager(interval time.Duration, burst int) (m LimiterManager) {
 //
 //	按 发送者 限制
 func (m LimiterManager) LimitByUser(ctx *nano.Ctx) *rate.Limiter {
-	switch msg := ctx.Value.(type) {
-	case *nano.Message:
+	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.Author.ID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
 	}
