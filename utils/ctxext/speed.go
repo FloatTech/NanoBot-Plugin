@@ -108,8 +108,7 @@ func (m LimiterManager) LimitByUser(ctx *nano.Ctx) *rate.Limiter {
 //
 //	按 guild 限制
 func (m LimiterManager) LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
-	switch msg := ctx.Value.(type) {
-	case *nano.Message:
+	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.GuildID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
 	}
@@ -120,8 +119,7 @@ func (m LimiterManager) LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
 //
 //	按 channel 限制
 func (m LimiterManager) LimitByChannel(ctx *nano.Ctx) *rate.Limiter {
-	switch msg := ctx.Value.(type) {
-	case *nano.Message:
+	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.ChannelID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
 	}
