@@ -7,6 +7,8 @@
 
   <img src="https://counter.seku.su/cmoe?name=NanoBot&theme=r34" /><br>
 
+  [![tencent-guild](https://img.shields.io/badge/%E9%A2%91%E9%81%93-Zer0BotPlugin-yellow?style=flat-square&logo=tencent-qq)](https://pd.qq.com/s/fjkx81mnr)
+
 </div>
 
 ## 命令行参数
