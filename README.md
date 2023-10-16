@@ -150,6 +150,19 @@ nanobot [-Tadhst] ID1 ID2 ...
 
 </details>
 
+<details>
+  <summary>在线代码运行</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/score"`
+
+  - [x] 签到
+
+  - [x] 获得签到背景
+
+  - [x] 查看等级排名
+
+</details>
+
 
 ## 特别感谢
 

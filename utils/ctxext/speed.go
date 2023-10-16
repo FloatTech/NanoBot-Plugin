@@ -33,6 +33,7 @@ var DefaultSingle = nano.NewSingle(
 //	每 10s 5次触发
 var defaultLimiterManager = rate.NewManager[int64](time.Second*10, 5)
 
+//nolint:structcheck
 type fakeLM struct {
 	limiters unsafe.Pointer
 	interval time.Duration
@@ -56,8 +57,10 @@ func LimitByUser(ctx *nano.Ctx) *rate.Limiter {
 	case *nano.Message:
 		id, _ := strconv.ParseUint(msg.Author.ID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
+	default:
+		return defaultLimiterManager.Load(0)
 	}
-	return defaultLimiterManager.Load(0)
+
 }
 
 // LimitByGroup 默认限速器 每 10s 5次触发
@@ -68,8 +71,9 @@ func LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
 	case *nano.Message:
 		id, _ := strconv.ParseUint(msg.GuildID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
+	default:
+		return defaultLimiterManager.Load(0)
 	}
-	return defaultLimiterManager.Load(0)
 }
 
 // LimitByChannel 默认限速器 每 10s 5次触发
@@ -80,8 +84,9 @@ func LimitByChannel(ctx *nano.Ctx) *rate.Limiter {
 	case *nano.Message:
 		id, _ := strconv.ParseUint(msg.ChannelID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
+	default:
+		return defaultLimiterManager.Load(0)
 	}
-	return defaultLimiterManager.Load(0)
 }
 
 // LimiterManager 自定义限速器管理
@@ -131,6 +136,7 @@ func (m LimiterManager) LimitByChannel(ctx *nano.Ctx) *rate.Limiter {
 	return defaultLimiterManager.Load(0)
 }
 
+// MustMessageNotNil 消息是否不为空
 func MustMessageNotNil(ctx *nano.Ctx) bool {
 	return ctx.Message != nil
 }

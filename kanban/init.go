@@ -9,6 +9,7 @@ func init() {
 	PrintBanner()
 }
 
+// PrintBanner 输出公告
 func PrintBanner() {
 	fmt.Print(
 		"\n======================[NanoBot-Plugin]======================",
