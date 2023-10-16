@@ -9,7 +9,7 @@ require (
 	github.com/FloatTech/imgfactory v0.2.2-0.20230315152233-49741fc994f9
 	github.com/FloatTech/zbpctrl v1.5.3-0.20230514154630-b74e6fcca380
 	github.com/FloatTech/zbputils v1.6.2-0.20231004125426-3f1ffcf78f51
-	github.com/fumiama/NanoBot v0.0.0-20231016051851-2e7ee9df5cb6
+	github.com/fumiama/NanoBot v0.0.0-20231016070353-5314405eeb9e
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
