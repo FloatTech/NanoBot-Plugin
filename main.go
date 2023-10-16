@@ -1,3 +1,4 @@
+// Package main NanoBot-Plugin main file
 package main
 
 import (
@@ -29,7 +30,8 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().UnixNano()) // 全局 seed，其他插件无需再 seed
+	// 全局 seed，其他插件无需再 seed
+	rand.Seed(time.Now().UnixNano()) //nolint: staticcheck
 
 	token := flag.String("t", "", "qq api token")
 	appid := flag.String("a", "", "qq appid")
@@ -66,7 +68,7 @@ func main() {
 		Handle(func(ctx *nano.Ctx) {
 			_, _ = ctx.SendPlainMessage(false, kanban.Banner)
 		})
-	nano.Run(&nano.Bot{
+	_ = nano.Run(&nano.Bot{
 		AppID:      *appid,
 		Token:      *token,
 		Secret:     *secret,
