@@ -456,9 +456,9 @@ func drawstatus(m *ctrl.Control[*nano.Ctx], botavartarurl, botname string) (send
 		return
 	}
 	canvas.SetRGBA255(0, 0, 0, 255)
-	canvas.DrawStringAnchored("Created By ZeroBot-Plugin "+kanban.Version, float64(canvas.W())/2+3, float64(canvas.H())-70/2+3, 0.5, 0.5)
+	canvas.DrawStringAnchored("Created By NanoBot-Plugin "+kanban.Version, float64(canvas.W())/2+3, float64(canvas.H())-70/2+3, 0.5, 0.5)
 	canvas.SetRGBA255(255, 255, 255, 255)
-	canvas.DrawStringAnchored("Created By ZeroBot-Plugin "+kanban.Version, float64(canvas.W())/2, float64(canvas.H())-70/2, 0.5, 0.5)
+	canvas.DrawStringAnchored("Created By NanoBot-Plugin "+kanban.Version, float64(canvas.W())/2, float64(canvas.H())-70/2, 0.5, 0.5)
 
 	sendimg = canvas.Image()
 	return
@@ -470,7 +470,7 @@ func botruntime() (string, error) {
 		return "", err
 	}
 	t := &strings.Builder{}
-	t.WriteString("ZeroBot-Plugin 已运行 ")
+	t.WriteString("NanoBot-Plugin 已运行 ")
 	t.WriteString(strconv.FormatInt((time.Now().Unix()-boottime.Unix())/86400, 10))
 	t.WriteString(" 天 ")
 	t.WriteString(time.Unix(time.Now().Unix()-boottime.Unix(), 0).UTC().Format("15:04:05"))
