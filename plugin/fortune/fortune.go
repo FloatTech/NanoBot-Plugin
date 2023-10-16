@@ -14,6 +14,7 @@ import (
 	nano "github.com/fumiama/NanoBot"
 
 	"github.com/FloatTech/gg" // 注册了 jpg png gif
+	"github.com/FloatTech/zbputils/img/text"
 	"github.com/sirupsen/logrus"
 	"github.com/wdvxdr1123/ZeroBot/utils/helper"
 
@@ -32,7 +33,7 @@ const (
 	// 基础文件位置
 	omikujson = "data/Fortune/text.json"
 	// 字体文件位置
-	font = "data/Font/sakura.ttf"
+	font = text.SakuraFontFile
 	// 生成图缓存位置
 	cache = images + "cache/"
 )
