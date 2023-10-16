@@ -19,7 +19,7 @@ var Version = "%s"
 var Banner = "* QQ + NanoBot + Golang\n" +
 	"* Version " + Version + " - %s\n" +
 	"* Copyright © 2023 - %d FloatTech. All Rights Reserved.\n" +
-	"* Project: https://github.com/FloatTech/NanoBot-Plugin"
+	"* Project: FloatTech/NanoBot-Plugin"
 `
 
 const timeformat = `2006-01-02 15:04:05 +0800 CST`
