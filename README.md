@@ -15,9 +15,10 @@
 nanobot [-Tadhst] ID1 ID2 ...
 
   -T int
-        timeout (s) (default 60)
+        api timeout (s) (default 60)
   -a string
         qq appid
+  -b    run in sandbox api
   -d    enable debug-level log output
   -h    print this help
   -s string
