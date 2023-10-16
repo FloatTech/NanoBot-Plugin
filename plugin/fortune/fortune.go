@@ -125,7 +125,7 @@ func init() {
 			}
 			// 检查背景图片是否存在
 			zipfile := images + kind + ".zip"
-			_, err := file.GetLazyData(zipfile, "data/control/stor.spb", false)
+			_, err := file.GetLazyData(zipfile, nano.Md5File, false)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return

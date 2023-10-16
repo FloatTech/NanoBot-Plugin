@@ -17,7 +17,6 @@ import (
 	"github.com/FloatTech/floatbox/web"
 	"github.com/FloatTech/imgfactory"
 	ctrl "github.com/FloatTech/zbpctrl"
-	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/img/text"
 	nano "github.com/fumiama/NanoBot"
 	"github.com/golang/freetype"
@@ -197,7 +196,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: 目前还没有人签到过")
 				return
 			}
-			_, err = file.GetLazyData(text.FontFile, control.Md5File, true)
+			_, err = file.GetLazyData(text.FontFile, nano.Md5File, true)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
