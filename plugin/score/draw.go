@@ -13,15 +13,15 @@ import (
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/gg"
 	"github.com/FloatTech/rendercard"
-	"github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/img/text"
 	"github.com/disintegration/imaging"
+	nano "github.com/fumiama/NanoBot"
 
 	"github.com/FloatTech/NanoBot-Plugin/kanban"
 )
 
 func floatstyle(a *scoredata) (img image.Image, err error) {
-	fontdata, err := file.GetLazyData(text.GlowSansFontFile, control.Md5File, false)
+	fontdata, err := file.GetLazyData(text.GlowSansFontFile, nano.Md5File, false)
 	if err != nil {
 		return
 	}
