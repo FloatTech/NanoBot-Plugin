@@ -17,7 +17,6 @@ import (
 
 	"github.com/FloatTech/AnimeAPI/bilibili"
 	"github.com/FloatTech/NanoBot-Plugin/kanban"
-	"github.com/FloatTech/floatbox/binary"
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/web"
 	"github.com/FloatTech/gg"
@@ -76,7 +75,7 @@ func init() { // 插件主体
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			if _, err := ctx.SendImage("base64://"+binary.BytesToString(sendimg), false); err != nil {
+			if _, err := ctx.SendImage("base64://"+nano.BytesToString(sendimg), false); err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}
 		})

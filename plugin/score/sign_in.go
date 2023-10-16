@@ -12,7 +12,6 @@ import (
 	"github.com/FloatTech/AnimeAPI/bilibili"
 	"github.com/FloatTech/AnimeAPI/wallet"
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
-	"github.com/FloatTech/floatbox/binary"
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/process"
 	"github.com/FloatTech/floatbox/web"
@@ -153,7 +152,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			_, err = ctx.SendImage("base64://"+binary.BytesToString(data), false)
+			_, err = ctx.SendImage("base64://"+nano.BytesToString(data), false)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}

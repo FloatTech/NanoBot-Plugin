@@ -8,7 +8,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/FloatTech/floatbox/binary"
 	fcext "github.com/FloatTech/floatbox/ctxext"
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/process"
@@ -155,9 +154,7 @@ func init() {
 		match := ctx.State["regex_matched"].([]string)[1]
 		info, ok := infoMap[match]
 		if ok {
-			card := cardMap[match]
-			imgname := card.Name
-			imgpath := cache + "/" + imgname + ".png"
+			imgpath := cache + "/" + match + ".png"
 			if file.IsNotExist(imgpath) {
 				imgurl := bed + info.ImgURL
 				data, err := web.RequestDataWith(web.NewTLS12Client(), imgurl, "GET", "gitcode.net", web.RandUA(), nil)
@@ -198,7 +195,7 @@ func init() {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			return
 		}
-		_, err = ctx.SendImage("base64://"+binary.BytesToString(cardList), false, "没有找到", match, "噢~")
+		_, err = ctx.SendImage("base64://"+nano.BytesToString(cardList), false, "没有找到", match, "噢~")
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 		}
