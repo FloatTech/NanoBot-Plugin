@@ -1,0 +1,73 @@
+project_name: nbp
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - id: nowin
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
+    goos:
+      - linux
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+    goarm:
+      - 6
+      - 7
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+  - id: win
+    env:
+      - CGO_ENABLED=0
+      - GO111MODULE=on
+    goos:
+      - windows
+    goarch:
+      - 386
+      - amd64
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+
+checksum:
+  name_template: "nbp_checksums.txt"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - fix typo
+      - Merge pull request
+      - Merge branch
+      - Merge remote-tracking
+      - go mod tidy
+
+archives:
+  - id: nowin
+    builds:
+      - nowin
+      - win
+    name_template: "nbp_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+nfpms:
+  - license: GPL 3.0
+    homepage: https://github.com/FloatTech/NanoBot-Plugin
+    file_name_template: "nbp_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    formats:
+      - deb
+      - rpm
+    maintainer: FloatTech
