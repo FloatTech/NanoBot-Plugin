@@ -18,6 +18,7 @@ import (
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/hyaku"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/manager"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/runcode"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/score"
 
 	// -----------------------以下为内置依赖，勿动------------------------ //
 	nano "github.com/fumiama/NanoBot"
