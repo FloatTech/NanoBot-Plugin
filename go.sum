@@ -35,8 +35,8 @@ github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 h1:BBade+Jl
 github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4/go.mod h1:H7chHJglrhPPzetLdzBleF8d22WYOv7UM/lEKYiwlKM=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 h1:Yzb9+7DPaBjB8zlTR87/ElzFsnQfuHnVUVqpZZIcV5Y=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5/go.mod h1:a2zkGnVExMxdzMo3M0Hi/3sEU+cWnZpSni0O6/Yb/P0=
-github.com/fumiama/NanoBot v0.0.0-20231016135651-1315cd67a423 h1:BwOdaSMmQh+l5isUMb4iRFuqYeNeOlCl75TxhicpZhQ=
-github.com/fumiama/NanoBot v0.0.0-20231016135651-1315cd67a423/go.mod h1:zUciPsZ7Vun5eLQucYohuj7VY4zEQm33406+3LtjJFc=
+github.com/fumiama/NanoBot v0.0.0-20231016154218-95a2bec150ff h1:DZwSnzh5KG/SiYSqq++AEQIkRbA+C3PabG2PvxJ1PbY=
+github.com/fumiama/NanoBot v0.0.0-20231016154218-95a2bec150ff/go.mod h1:zUciPsZ7Vun5eLQucYohuj7VY4zEQm33406+3LtjJFc=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b h1:Zt3pFQditAdWTHCOVkiloc9ZauBoWrb37guFV4iIRvE=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/fumiama/cron v1.3.0 h1:ZWlwuexF+HQHl3cYytEE5HNwD99q+3vNZF1GrEiXCFo=
