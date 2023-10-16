@@ -158,7 +158,7 @@ func init() {
 					return
 				}
 			}
-			_, err = ctx.SendImage(cachefile, false)
+			_, err = ctx.SendImage("file:///"+file.BOTPATH+"/"+cachefile, false)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
