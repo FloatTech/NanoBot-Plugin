@@ -2,7 +2,7 @@
   <img src=".github/nano.jpeg" alt="东云名乃" width = "256">
   <br>
 
-  <h1>NanoBot</h1>
+  <h1>NanoBot-Plugin</h1>
   基于 NanoBot 的 QQ 机器人插件合集<br><br>
 
   <img src="https://counter.seku.su/cmoe?name=NanoBot&theme=r34" /><br>
