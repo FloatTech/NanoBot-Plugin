@@ -201,8 +201,6 @@ nanobot [-Tadhst] ID1 ID2 ...
 
   - [x] 抽老婆
 
-  - [x] 解塔罗牌[牌名]
-
 </details>
 
 <details>
