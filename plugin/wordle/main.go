@@ -262,7 +262,7 @@ func newWordleGame(target string) func(string) (bool, []byte, error) {
 				}
 			}
 		}
-		data, err = imgfactory.ToBytes(ctx.Image())
+		data, err = imgfactory.ToBase64(ctx.Image())
 		return
 	}
 }
