@@ -23,6 +23,8 @@ import (
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/score"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/status"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/tarot"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/wife"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/wordle"
 
 	// -----------------------以下为内置依赖，勿动------------------------ //
 	nano "github.com/fumiama/NanoBot"
