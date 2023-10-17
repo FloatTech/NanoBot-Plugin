@@ -3,16 +3,16 @@ module github.com/FloatTech/NanoBot-Plugin
 go 1.20
 
 require (
-	github.com/FloatTech/AnimeAPI v1.6.1-0.20231016040616-78f012eba395
-	github.com/FloatTech/floatbox v0.0.0-20230827160415-f0865337a824
+	github.com/FloatTech/AnimeAPI v1.7.1-0.20231017135344-aefd1d56e900
+	github.com/FloatTech/floatbox v0.0.0-20231017134949-ae5059ebace7
 	github.com/FloatTech/gg v1.1.3-0.20230226151425-6ea91286ba08
 	github.com/FloatTech/imgfactory v0.2.2-0.20230413152719-e101cc3606ef
 	github.com/FloatTech/rendercard v0.0.10-0.20230223064326-45d29fa4ede9
-	github.com/FloatTech/sqlite v1.6.2
-	github.com/FloatTech/zbpctrl v1.5.3-0.20230514154630-b74e6fcca380
-	github.com/FloatTech/zbputils v1.6.2-0.20231004125426-3f1ffcf78f51
+	github.com/FloatTech/sqlite v1.6.3
+	github.com/FloatTech/zbpctrl v1.6.0
+	github.com/FloatTech/zbputils v1.7.1-0.20231017135158-7e6c839764eb
 	github.com/disintegration/imaging v1.6.2
-	github.com/fumiama/NanoBot v0.0.0-20231017134301-2afbe5c83de0
+	github.com/fumiama/NanoBot v0.0.0-20231017135500-d82564e7988d
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
@@ -20,7 +20,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.23.9
 	github.com/sirupsen/logrus v1.9.3
 	github.com/wcharczuk/go-chart/v2 v2.1.1
-	github.com/wdvxdr1123/ZeroBot v1.7.4
+	github.com/wdvxdr1123/ZeroBot v1.7.5-0.20231009162356-57f71b9f5258
 	golang.org/x/text v0.12.0
 )
 

@@ -3,7 +3,7 @@
   <br>
 
   <h1>NanoBot-Plugin</h1>
-  基于 NanoBot 的 QQ 机器人插件合集<br><br>
+  基于 [NanoBot](https://github.com/fumiama/NanoBot) 的 QQ 机器人插件合集<br><br>
 
   <img src="https://counter.seku.su/cmoe?name=NanoBot&theme=r34" /><br>
 
