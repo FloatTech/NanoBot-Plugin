@@ -146,9 +146,19 @@ func init() {
 		}
 		// done.
 		f, err := os.Create(drawedFile)
-		if err == nil {
-			_, err = imgfactory.WriteTo(drawimage, f)
+		if err != nil {
+			data, err := imgfactory.ToBytes(drawimage)
+			if err != nil {
+				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
+				return
+			}
+			_, err = ctx.SendImage("base64://"+nano.BytesToString(data), false)
+			if err != nil {
+				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
+			}
+			return
 		}
+		_, err = imgfactory.WriteTo(drawimage, f)
 		defer f.Close()
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)

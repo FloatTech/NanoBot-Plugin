@@ -16,7 +16,6 @@ import (
 	"github.com/FloatTech/gg" // 注册了 jpg png gif
 	"github.com/FloatTech/zbputils/img/text"
 	"github.com/sirupsen/logrus"
-	"github.com/wdvxdr1123/ZeroBot/utils/helper"
 
 	fcext "github.com/FloatTech/floatbox/ctxext"
 	"github.com/FloatTech/floatbox/file"
@@ -143,7 +142,7 @@ func init() {
 			// 随机获取签文
 			randtextindex := fcext.RandSenderPerDayN(int64(uid), len(omikujis))
 			title, text := omikujis[randtextindex]["title"], omikujis[randtextindex]["content"]
-			digest := md5.Sum(helper.StringToBytes(zipfile + strconv.Itoa(index) + title + text))
+			digest := md5.Sum(nano.StringToBytes(zipfile + strconv.Itoa(index) + title + text))
 			cachefile := cache + hex.EncodeToString(digest[:])
 			if file.IsNotExist(cachefile) {
 				f, err := os.Create(cachefile)

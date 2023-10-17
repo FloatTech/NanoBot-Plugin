@@ -13,6 +13,7 @@ import (
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/base64gua"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/baseamasiro"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/chrev"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/dish"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/emojimix"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/fortune"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/genshin"
@@ -20,6 +21,8 @@ import (
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/manager"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/runcode"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/score"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/status"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/tarot"
 
 	// -----------------------以下为内置依赖，勿动------------------------ //
 	nano "github.com/fumiama/NanoBot"
