@@ -180,7 +180,7 @@ func init() {
 					case err == errTimesRunOut:
 						tick.Stop()
 						after.Stop()
-						_, err := ctx.SendImage("base64://"+nano.BytesToString(img), true, "游戏结束...答案是: ", target, "(", tt, ")")
+						_, err := ctx.SendPlainMessage(true, "游戏结束...答案是: ", target, "(", tt, ")")
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 						}
