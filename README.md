@@ -194,6 +194,32 @@ nanobot [-Tadhst] ID1 ID2 ...
 
 </details>
 
+<details>
+  <summary>抽老婆</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/wife"`
+
+  - [x] 抽老婆
+
+  - [x] 解塔罗牌[牌名]
+
+</details>
+
+<details>
+  <summary>猜单词</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/wordle"`
+
+  - [x] 个人猜单词
+
+  - [x] 团队猜单词
+
+  - [x] 团队六阶猜单词
+
+  - [x] 团队七阶猜单词
+
+</details>
+
 
 ## 特别感谢
 
