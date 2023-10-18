@@ -32,6 +32,20 @@ nanobot [-Tadhst] ID1 ID2 ...
         qq api token
 ```
 
+其中公域配置参考如下，为一个数组，可自行增加更多 bot 实例。注意`Properties`不可为`[]`
+```yaml
+- AppID: "123456"
+  Token: xxxxxxx
+  Secret: ""
+  SuperUsers:
+    - "123456789"
+  Timeout: 1m0s
+  Intents: 1812730883
+  ShardIndex: 0
+  ShardCount: 0
+  Properties: null
+```
+
 ## 功能
 > 在编译时，以下功能均可通过注释`main.go`中的相应`import`而物理禁用，减小插件体积。
 

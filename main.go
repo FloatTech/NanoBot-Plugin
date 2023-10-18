@@ -29,6 +29,9 @@ import (
 	// -----------------------以下为内置依赖，勿动------------------------ //
 	nano "github.com/fumiama/NanoBot"
 	"github.com/sirupsen/logrus"
+	"gopkg.in/yaml.v3"
+
+	"github.com/FloatTech/floatbox/process"
 
 	"github.com/FloatTech/NanoBot-Plugin/kanban"
 	// -----------------------以上为内置依赖，勿动------------------------ //
@@ -41,12 +44,15 @@ func main() {
 	token := flag.String("t", "", "qq api token")
 	appid := flag.String("a", "", "qq appid")
 	secret := flag.String("s", "", "qq secret")
-	debug := flag.Bool("d", false, "enable debug-level log output")
+	debug := flag.Bool("D", false, "enable debug-level log output")
 	timeout := flag.Int("T", 60, "api timeout (s)")
 	help := flag.Bool("h", false, "print this help")
-	sandbox := flag.Bool("b", false, "run in sandbox api")
-	onlypublic := flag.Bool("p", false, "only listen to public intent")
-	shardindex := flag.Uint("r", 0, "shard index")
+	loadconfig := flag.String("c", "", "load from config")
+	sandbox := flag.Bool("sandbox", false, "run in sandbox api")
+	onlypublic := flag.Bool("public", false, "only listen to public intent")
+	shardindex := flag.Uint("shardindex", 0, "shard index")
+	shardcount := flag.Uint("shardcount", 0, "shard count")
+	savecfg := flag.String("save", "", "save bot config to filename (eg. config.yaml)")
 	flag.Parse()
 	if *help {
 		fmt.Println("Usage:")
@@ -75,17 +81,48 @@ func main() {
 		nano.OpenAPI = nano.SandboxAPI
 	}
 
+	bot := []*nano.Bot{}
+	if *loadconfig == "" {
+		bot = append(bot, &nano.Bot{
+			AppID:      *appid,
+			Token:      *token,
+			Secret:     *secret,
+			SuperUsers: sus,
+			Timeout:    time.Duration(*timeout) * time.Second,
+			Intents:    intent,
+			ShardIndex: uint8(*shardindex),
+			ShardCount: uint8(*shardcount),
+		})
+	} else {
+		f, err := os.Open(*loadconfig)
+		if err != nil {
+			logrus.Fatal(err)
+		}
+		dec := yaml.NewDecoder(f)
+		dec.KnownFields(true)
+		err = dec.Decode(&bot)
+		_ = f.Close()
+		if err != nil {
+			logrus.Fatal(err)
+		}
+	}
+	if *savecfg != "" {
+		f, err := os.Create(*savecfg)
+		if err != nil {
+			logrus.Fatal(err)
+		}
+		defer f.Close()
+		err = yaml.NewEncoder(f).Encode(bot)
+		if err != nil {
+			logrus.Fatal(err)
+		}
+		logrus.Infoln("已将当前配置保存到", *savecfg)
+		os.Exit(0)
+	}
+
 	nano.OnMessageCommandGroup([]string{"help", "帮助", "menu", "菜单"}, nano.OnlyToMe).SetBlock(true).
 		Handle(func(ctx *nano.Ctx) {
 			_, _ = ctx.SendPlainMessage(false, kanban.Banner)
 		})
-	_ = nano.Run(&nano.Bot{
-		AppID:      *appid,
-		Token:      *token,
-		Secret:     *secret,
-		SuperUsers: sus,
-		Timeout:    time.Duration(*timeout) * time.Second,
-		Intents:    intent,
-		ShardIndex: uint16(*shardindex),
-	})
+	_ = nano.Run(process.GlobalInitMutex.Unlock, bot...)
 }

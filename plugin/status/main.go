@@ -60,7 +60,7 @@ func init() { // 插件主体
 		Handle(func(ctx *nano.Ctx) {
 			now := time.Now().Hour()
 			isday = now > 7 && now < 19
-			bot, err := ctx.Caller.GetMyInfo()
+			bot, err := ctx.GetMyInfo()
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
