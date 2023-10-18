@@ -79,7 +79,7 @@ func init() {
 		logrus.Warnln("VT100设置失败, 将以无色模式输出")
 	}
 
-	err = setConsoleTitle("ZeroBot-Plugin " + banner.Version + " " + banner.Copyright)
+	err = setConsoleTitle("NanoBot-Plugin " + banner.Version + " " + banner.Copyright)
 	if err != nil {
 		panic(err)
 	}
