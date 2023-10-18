@@ -45,6 +45,8 @@ func main() {
 	timeout := flag.Int("T", 60, "api timeout (s)")
 	help := flag.Bool("h", false, "print this help")
 	sandbox := flag.Bool("b", false, "run in sandbox api")
+	onlypublic := flag.Bool("p", false, "only listen to public intent")
+	shardindex := flag.Uint("r", 0, "shard index")
 	flag.Parse()
 	if *help {
 		fmt.Println("Usage:")
@@ -54,6 +56,10 @@ func main() {
 
 	if *debug {
 		logrus.SetLevel(logrus.DebugLevel)
+	}
+	intent := uint32(nano.IntentAll)
+	if *onlypublic {
+		intent = nano.IntentPublic
 	}
 
 	sus := make([]string, 0, 16)
@@ -77,8 +83,9 @@ func main() {
 		AppID:      *appid,
 		Token:      *token,
 		Secret:     *secret,
-		Intents:    nano.IntentPublic,
-		Timeout:    time.Duration(*timeout) * time.Second,
 		SuperUsers: sus,
+		Timeout:    time.Duration(*timeout) * time.Second,
+		Intents:    intent,
+		ShardIndex: uint16(*shardindex),
 	})
 }

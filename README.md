@@ -23,6 +23,9 @@ nanobot [-Tadhst] ID1 ID2 ...
   -b    run in sandbox api
   -d    enable debug-level log output
   -h    print this help
+  -p    only listen to public intent
+  -r uint
+        shard index
   -s string
         qq secret
   -t string
