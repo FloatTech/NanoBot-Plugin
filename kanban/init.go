@@ -4,7 +4,7 @@ package kanban
 import (
 	"fmt"
 
-	"github.com/FloatTech/zbputils/control"
+	nano "github.com/fumiama/NanoBot"
 	"github.com/fumiama/go-registry"
 
 	"github.com/FloatTech/NanoBot-Plugin/kanban/banner"
@@ -16,7 +16,7 @@ func init() {
 	PrintBanner()
 }
 
-var reg = registry.NewRegReader("reilia.fumiama.top:32664", control.Md5File, "fumiama")
+var reg = registry.NewRegReader("reilia.fumiama.top:32664", nano.Md5File, "fumiama")
 
 // PrintBanner ...
 func PrintBanner() {
