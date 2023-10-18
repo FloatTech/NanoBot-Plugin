@@ -138,7 +138,7 @@ func init() {
 				return
 			}
 			var next *nano.FutureEvent
-			if ctx.State["regex_matched"].([]string)[1] == "团队" && !nano.OnlyPrivate(ctx) {
+			if ctx.State["regex_matched"].([]string)[1] == "团队" && !nano.OnlyDirect(ctx) {
 				next = nano.NewFutureEvent("Message", 999, false, nano.RegexRule(fmt.Sprintf(`^([A-Z]|[a-z]){%d}$`, class)),
 					nano.OnlyChannel, nano.CheckChannel(ctx.Message.ChannelID))
 			} else {

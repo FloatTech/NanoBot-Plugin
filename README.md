@@ -58,6 +58,15 @@ nanobot [-Tadhst] ID1 ID2 ...
 > 在编译时，以下功能均可通过注释`main.go`中的相应`import`而物理禁用，减小插件体积。
 
 <details>
+  <summary>触发者撤回时也自动撤回(仅私域可用)</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/autowithdraw"`
+
+  - [x] 撤回一条消息
+
+</details>
+
+<details>
   <summary>base16384加解密</summary>
 
   `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/b14"`

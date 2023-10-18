@@ -12,7 +12,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/FloatTech/ZeroBot-Plugin/kanban/banner"
+	"github.com/FloatTech/NanoBot-Plugin/kanban/banner"
 )
 
 var (

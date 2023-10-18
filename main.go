@@ -13,6 +13,7 @@ import (
 
 	"github.com/FloatTech/NanoBot-Plugin/kanban" // 打印 banner
 
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/autowithdraw"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/b14"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/base64gua"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/baseamasiro"
