@@ -17,7 +17,7 @@ import (
 	"github.com/disintegration/imaging"
 	nano "github.com/fumiama/NanoBot"
 
-	"github.com/FloatTech/NanoBot-Plugin/kanban"
+	"github.com/FloatTech/NanoBot-Plugin/kanban/banner"
 )
 
 func floatstyle(a *scoredata) (img image.Image, err error) {
@@ -206,7 +206,7 @@ func customtext(a *scoredata, fontdata []byte, cw, ch, aw float64, textcolor col
 		return
 	}
 
-	canvas.DrawStringAnchored("Create By NanoBot-Plugin "+kanban.Version, 0+4, ch, 0, -0.5)
+	canvas.DrawStringAnchored("Create By NanoBot-Plugin "+banner.Version, 0+4, ch, 0, -0.5)
 
 	err = canvas.ParseFontFace(fontdata, (ch-sch)/2/5*3)
 	if err != nil {

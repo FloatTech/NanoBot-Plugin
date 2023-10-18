@@ -15,15 +15,6 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/FloatTech/AnimeAPI/bilibili"
-	"github.com/FloatTech/NanoBot-Plugin/kanban"
-	"github.com/FloatTech/floatbox/file"
-	"github.com/FloatTech/floatbox/web"
-	"github.com/FloatTech/gg"
-	"github.com/FloatTech/imgfactory"
-	"github.com/FloatTech/rendercard"
-	ctrl "github.com/FloatTech/zbpctrl"
-	"github.com/FloatTech/zbputils/img/text"
 	"github.com/disintegration/imaging"
 	"github.com/shirou/gopsutil/v3/cpu"
 	"github.com/shirou/gopsutil/v3/disk"
@@ -33,6 +24,17 @@ import (
 	"golang.org/x/text/language"
 
 	nano "github.com/fumiama/NanoBot"
+
+	"github.com/FloatTech/AnimeAPI/bilibili"
+	"github.com/FloatTech/floatbox/file"
+	"github.com/FloatTech/floatbox/web"
+	"github.com/FloatTech/gg"
+	"github.com/FloatTech/imgfactory"
+	"github.com/FloatTech/rendercard"
+	ctrl "github.com/FloatTech/zbpctrl"
+	"github.com/FloatTech/zbputils/img/text"
+
+	"github.com/FloatTech/NanoBot-Plugin/kanban/banner"
 )
 
 const (
@@ -455,9 +457,9 @@ func drawstatus(m *ctrl.Control[*nano.Ctx], botavartarurl, botname string) (send
 		return
 	}
 	canvas.SetRGBA255(0, 0, 0, 255)
-	canvas.DrawStringAnchored("Created By NanoBot-Plugin "+kanban.Version, float64(canvas.W())/2+3, float64(canvas.H())-70/2+3, 0.5, 0.5)
+	canvas.DrawStringAnchored("Created By NanoBot-Plugin "+banner.Version, float64(canvas.W())/2+3, float64(canvas.H())-70/2+3, 0.5, 0.5)
 	canvas.SetRGBA255(255, 255, 255, 255)
-	canvas.DrawStringAnchored("Created By NanoBot-Plugin "+kanban.Version, float64(canvas.W())/2, float64(canvas.H())-70/2, 0.5, 0.5)
+	canvas.DrawStringAnchored("Created By NanoBot-Plugin "+banner.Version, float64(canvas.W())/2, float64(canvas.H())-70/2, 0.5, 0.5)
 
 	sendimg = canvas.Image()
 	return

@@ -6,8 +6,12 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"runtime"
 	"strconv"
+	"strings"
 	"time"
+
+	"github.com/FloatTech/NanoBot-Plugin/kanban" // 打印 banner
 
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/b14"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/base64gua"
@@ -33,13 +37,14 @@ import (
 
 	"github.com/FloatTech/floatbox/process"
 
-	"github.com/FloatTech/NanoBot-Plugin/kanban"
+	"github.com/FloatTech/NanoBot-Plugin/kanban/banner"
 	// -----------------------以上为内置依赖，勿动------------------------ //
 )
 
 func main() {
-	// 全局 seed，其他插件无需再 seed
-	rand.Seed(time.Now().UnixNano()) //nolint: staticcheck
+	if !strings.Contains(runtime.Version(), "go1.2") { // go1.20之前版本需要全局 seed，其他插件无需再 seed
+		rand.Seed(time.Now().UnixNano()) //nolint: staticcheck
+	}
 
 	token := flag.String("t", "", "qq api token")
 	appid := flag.String("a", "", "qq appid")
@@ -122,7 +127,11 @@ func main() {
 
 	nano.OnMessageCommandGroup([]string{"help", "帮助", "menu", "菜单"}, nano.OnlyToMe).SetBlock(true).
 		Handle(func(ctx *nano.Ctx) {
-			_, _ = ctx.SendPlainMessage(false, kanban.Banner)
+			_, _ = ctx.SendPlainMessage(false, banner.Banner)
+		})
+	nano.OnMessageFullMatch("查看nbp公告", nano.OnlyToMe, nano.AdminPermission).SetBlock(true).
+		Handle(func(ctx *nano.Ctx) {
+			_, _ = ctx.SendPlainMessage(false, strings.ReplaceAll(kanban.Kanban(), "\t", ""))
 		})
 	_ = nano.Run(process.GlobalInitMutex.Unlock, bot...)
 }

@@ -16,18 +16,26 @@
 ```bash
 nanobot [-Tadhst] ID1 ID2 ...
 
+  -D    enable debug-level log output
   -T int
         api timeout (s) (default 60)
   -a string
         qq appid
-  -b    run in sandbox api
-  -d    enable debug-level log output
+  -c string
+        load from config
   -h    print this help
-  -p    only listen to public intent
-  -r uint
-        shard index
+  -public
+        only listen to public intent
   -s string
         qq secret
+  -sandbox
+        run in sandbox api
+  -save string
+        save bot config to filename (eg. config.yaml)
+  -shardcount uint
+        shard count
+  -shardindex uint
+        shard index
   -t string
         qq api token
 ```
