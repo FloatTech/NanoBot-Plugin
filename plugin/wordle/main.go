@@ -132,7 +132,7 @@ func init() {
 			}
 			game := newWordleGame(target)
 			_, img, _ := game("")
-			_, err = ctx.SendImage("base64://"+nano.BytesToString(img), true, "你有", class+1, "次机会猜出单词，单词长度为", class, "，请发送单词")
+			_, err = ctx.SendImageBytes(img, true, "你有", class+1, "次机会猜出单词，单词长度为", class, "，请发送单词")
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
@@ -172,7 +172,7 @@ func init() {
 					case win:
 						tick.Stop()
 						after.Stop()
-						_, err := ctx.SendImage("base64://"+nano.BytesToString(img), true, "太棒了，你猜出来了！答案是: ", target, "(", tt, ")")
+						_, err := ctx.SendImageBytes(img, true, "太棒了，你猜出来了！答案是: ", target, "(", tt, ")")
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 						}
@@ -198,7 +198,7 @@ func init() {
 							return
 						}
 					default:
-						_, err := ctx.SendImage("base64://"+nano.BytesToString(img), true)
+						_, err := ctx.SendImageBytes(img, true)
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 							return
@@ -262,7 +262,7 @@ func newWordleGame(target string) func(string) (bool, []byte, error) {
 				}
 			}
 		}
-		data, err = imgfactory.ToBase64(ctx.Image())
+		data, err = imgfactory.ToBytes(ctx.Image())
 		return
 	}
 }

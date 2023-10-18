@@ -36,8 +36,8 @@ github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 h1:BBade+Jl
 github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4/go.mod h1:H7chHJglrhPPzetLdzBleF8d22WYOv7UM/lEKYiwlKM=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 h1:Yzb9+7DPaBjB8zlTR87/ElzFsnQfuHnVUVqpZZIcV5Y=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5/go.mod h1:a2zkGnVExMxdzMo3M0Hi/3sEU+cWnZpSni0O6/Yb/P0=
-github.com/fumiama/NanoBot v0.0.0-20231018063321-f6748029989a h1:PvvehKtRzag51IqijFLeOOSXdqE9Ubok3th61hmuZQc=
-github.com/fumiama/NanoBot v0.0.0-20231018063321-f6748029989a/go.mod h1:uveUWnqIjAod3AI5XHlEuG41bMIVKwEDzLAjAxxHmfw=
+github.com/fumiama/NanoBot v0.0.0-20231018155514-da5cad685a28 h1:JTdPj+t8emfMILq4iasN5rcj8KskS9BNeCfNDxzRPC0=
+github.com/fumiama/NanoBot v0.0.0-20231018155514-da5cad685a28/go.mod h1:uveUWnqIjAod3AI5XHlEuG41bMIVKwEDzLAjAxxHmfw=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b h1:Zt3pFQditAdWTHCOVkiloc9ZauBoWrb37guFV4iIRvE=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/fumiama/cron v1.3.0 h1:ZWlwuexF+HQHl3cYytEE5HNwD99q+3vNZF1GrEiXCFo=
@@ -60,7 +60,6 @@ github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430 h1:XL4SnagpaVHYy
 github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430/go.mod h1:lEaZsT4FRSqcjnQ5q8y+mkenkzR/r1D3BJmfdp0vqDg=
 github.com/go-ole/go-ole v1.2.6 h1:/Fpf6oFPoeFik9ty7siob0G6Ke8QvQEuVcuChpwXzpY=
 github.com/go-ole/go-ole v1.2.6/go.mod h1:pprOEPIfldk/42T2oK7lQ4v4JSDwmV0As9GaiUsvbm0=
-github.com/go-playground/assert/v2 v2.2.0 h1:JvknZsQTYeFEAhQwI4qEt9cyV5ONwRHC+lYKSsYSR8s=
 github.com/go-sql-driver/mysql v1.5.0 h1:ozyZYNQW3x3HtqT1jira07DN2PArx2v7/mN66gGcHOs=
 github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
 github.com/golang-sql/civil v0.0.0-20190719163853-cb61b32ac6fe h1:lXe2qZdvpiX5WZkZR4hgp4KJVfY3nMkvmwbVkpv1rVY=

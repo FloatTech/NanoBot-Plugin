@@ -62,7 +62,7 @@ func init() {
 		}
 		sdb = initialize(engine.DataFolder() + "score.db")
 	}()
-	engine.OnMessageRegex("签到").Limit(ctxext.LimitByUser).SetBlock(true).Handle(func(ctx *nano.Ctx) {
+	engine.OnMessageFullMatch("签到").Limit(ctxext.LimitByUser).SetBlock(true).Handle(func(ctx *nano.Ctx) {
 		uid := ctx.Message.Author.ID
 		if uid == "" {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: 未获取到用户uid")
@@ -152,7 +152,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			_, err = ctx.SendImage("base64://"+nano.BytesToString(data), false)
+			_, err = ctx.SendImageBytes(data, false)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}

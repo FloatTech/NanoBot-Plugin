@@ -128,11 +128,11 @@ func main() {
 
 	nano.OnMessageCommandGroup([]string{"help", "帮助", "menu", "菜单"}, nano.OnlyToMe).SetBlock(true).
 		Handle(func(ctx *nano.Ctx) {
-			_, _ = ctx.SendPlainMessage(false, banner.Banner)
+			_, _ = ctx.SendChain(nano.Text(banner.Banner))
 		})
 	nano.OnMessageFullMatch("查看nbp公告", nano.OnlyToMe, nano.AdminPermission).SetBlock(true).
 		Handle(func(ctx *nano.Ctx) {
-			_, _ = ctx.SendPlainMessage(false, strings.ReplaceAll(kanban.Kanban(), "\t", ""))
+			_, _ = ctx.SendChain(nano.Text(strings.ReplaceAll(kanban.Kanban(), "\t", "")))
 		})
 	_ = nano.Run(process.GlobalInitMutex.Unlock, bot...)
 }

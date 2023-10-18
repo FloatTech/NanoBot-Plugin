@@ -12,6 +12,7 @@ import (
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/process"
 	"github.com/FloatTech/floatbox/web"
+	"github.com/FloatTech/imgfactory"
 	ctrl "github.com/FloatTech/zbpctrl"
 
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
@@ -190,12 +191,17 @@ func init() {
 		build.WriteString(strings.Join(majorArcanaName[14:22], " "))
 		build.WriteString("\n小阿尔卡纳:\n[圣杯|星币|宝剑|权杖] [0-10|侍从|骑士|王后|国王]")
 		txt := build.String()
-		cardList, err := text.RenderToBase64(txt, text.FontFile, 420, 20)
+		cardList, err := text.Render(txt, text.FontFile, 420, 20)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			return
 		}
-		_, err = ctx.SendImage("base64://"+nano.BytesToString(cardList), false, "没有找到", match, "噢~")
+		data, err := imgfactory.ToBytes(cardList)
+		if err != nil {
+			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
+			return
+		}
+		_, err = ctx.SendImageBytes(data, false, "没有找到", match, "噢~")
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 		}

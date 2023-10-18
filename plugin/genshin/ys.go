@@ -95,12 +95,12 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			b, err := imgfactory.ToBase64(img)
+			b, err := imgfactory.ToBytes(img)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			_, err = ctx.SendImage("base64://"+nano.BytesToString(b), true, func() string {
+			_, err = ctx.SendImageBytes(b, true, func() string {
 				if mode {
 					return "恭喜你抽到了:\n" + str
 				}

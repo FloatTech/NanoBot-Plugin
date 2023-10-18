@@ -2,7 +2,6 @@
 package wife
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"os"
 	"strconv"
@@ -51,13 +50,13 @@ func init() {
 			data, err := engine.GetLazyData("wives/"+card, true)
 			card, _, _ = strings.Cut(card, ".")
 			if err != nil {
-				_, err = ctx.SendPlainMessage(false, "<@", uid, ">今天的二次元老婆是~【", card, "】哒\n【图片下载失败: ", err, "】")
+				_, err = ctx.SendChain(nano.At(uid), nano.Text("今天的二次元老婆是~【", card, "】哒\n【图片下载失败: ", err, "】"))
 				if err != nil {
 					_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				}
 				return
 			}
-			_, err = ctx.SendImage("base64://"+base64.StdEncoding.EncodeToString(data), false, "<@", uid, ">今天的二次元老婆是~【", card, "】哒")
+			_, err = ctx.SendChain(nano.At(uid), nano.Text("今天的二次元老婆是~【", card, "】哒"), nano.ImageBytes(data))
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}

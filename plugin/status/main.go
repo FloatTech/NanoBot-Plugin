@@ -72,12 +72,12 @@ func init() { // 插件主体
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			sendimg, err := imgfactory.ToBase64(img)
+			sendimg, err := imgfactory.ToBytes(img)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
-			if _, err := ctx.SendImage("base64://"+nano.BytesToString(sendimg), false); err != nil {
+			if _, err := ctx.SendImageBytes(sendimg, false); err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}
 		})
