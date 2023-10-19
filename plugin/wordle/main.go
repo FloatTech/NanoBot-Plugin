@@ -153,13 +153,13 @@ func init() {
 			for {
 				select {
 				case <-tick.C:
-					_, err := ctx.SendPlainMessage(true, "猜单词, 你还有15s作答时间")
+					_, err := ctx.SendPlainMessage(false, "猜单词, 你还有15s作答时间")
 					if err != nil {
 						_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 						return
 					}
 				case <-after.C:
-					_, err := ctx.SendPlainMessage(true, "猜单词超时，游戏结束...答案是: ", target, "(", tt, ")")
+					_, err := ctx.SendPlainMessage(false, "猜单词超时，游戏结束...答案是: ", target, "(", tt, ")")
 					if err != nil {
 						_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 					}
@@ -180,19 +180,19 @@ func init() {
 					case err == errTimesRunOut:
 						tick.Stop()
 						after.Stop()
-						_, err := ctx.SendPlainMessage(true, "游戏结束...答案是: ", target, "(", tt, ")")
+						_, err := ctx.SendPlainMessage(false, "游戏结束...答案是: ", target, "(", tt, ")")
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 						}
 						return
 					case err == errLengthNotEnough:
-						_, err := ctx.SendPlainMessage(true, "单词长度错误")
+						_, err := ctx.SendChain(nano.ReplyTo(c.Message.ID), nano.Text("单词长度错误"))
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 							return
 						}
 					case err == errUnknownWord:
-						_, err := ctx.SendPlainMessage(true, "你确定存在这样的单词吗？")
+						_, err := ctx.SendChain(nano.ReplyTo(c.Message.ID), nano.Text("你确定存在这样的单词吗？"))
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 							return
