@@ -99,7 +99,7 @@ func init() {
 			}
 		}
 		// 更新签到次数
-		err = sdb.InsertOrUpdateSignInCountByUID(int64(uidint), si.Count+1)
+		err := sdb.InsertOrUpdateSignInCountByUID(int64(uidint), si.Count+1)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			return
