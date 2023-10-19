@@ -192,7 +192,7 @@ func init() {
 							return
 						}
 					case err == errUnknownWord:
-						_, err := ctx.SendPlainMessage(true, "你确定存在这样的单词吗？")
+						_, err := ctx.SendChain(nano.ReplyTo(c.Message.ID), nano.Text("你确定存在这样的单词吗？"))
 						if err != nil {
 							_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 							return
