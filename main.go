@@ -123,7 +123,7 @@ func main() {
 			logrus.Fatal(err)
 		}
 		logrus.Infoln("已将当前配置保存到", *savecfg)
-		os.Exit(0)
+		return
 	}
 
 	nano.OnMessageCommandGroup([]string{"help", "帮助", "menu", "菜单"}, nano.OnlyToMe).SetBlock(true).
