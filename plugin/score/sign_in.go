@@ -44,6 +44,7 @@ var (
 func init() {
 	cachePath := engine.DataFolder() + "cache/"
 	go func() {
+		sdb = initialize(engine.DataFolder() + "score.db")
 		ok := file.IsExist(cachePath)
 		if !ok {
 			err := os.MkdirAll(cachePath, 0777)
@@ -60,7 +61,6 @@ func init() {
 				}
 			}
 		}
-		sdb = initialize(engine.DataFolder() + "score.db")
 	}()
 	engine.OnMessageFullMatch("签到").Limit(ctxext.LimitByUser).SetBlock(true).Handle(func(ctx *nano.Ctx) {
 		uid := ctx.Message.Author.ID
@@ -68,13 +68,13 @@ func init() {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: 未获取到用户uid")
 			return
 		}
-		uidint, _ := strconv.ParseInt(uid, 10, 64)
+		uidint, _ := strconv.ParseUint(uid, 10, 64)
 		today := time.Now().Format("20060102")
 		// 签到图片
 		drawedFile := cachePath + uid + today + "signin.png"
 		picFile := cachePath + uid + today + ".png"
 		// 获取签到时间
-		si := sdb.GetSignInByUID(uidint)
+		si := sdb.GetSignInByUID(int64(uidint))
 		siUpdateTimeStr := si.UpdatedAt.Format("20060102")
 		switch {
 		case si.Count >= signinMax && siUpdateTimeStr == today:
@@ -92,20 +92,20 @@ func init() {
 			return
 		case siUpdateTimeStr != today:
 			// 如果是跨天签到就清数据
-			err := sdb.InsertOrUpdateSignInCountByUID(uidint, 0)
+			err := sdb.InsertOrUpdateSignInCountByUID(int64(uidint), 0)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
 			}
 		}
 		// 更新签到次数
-		err := sdb.InsertOrUpdateSignInCountByUID(uidint, si.Count+1)
+		err = sdb.InsertOrUpdateSignInCountByUID(int64(uidint), si.Count+1)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			return
 		}
 		// 更新经验
-		level := sdb.GetScoreByUID(uidint).Score + 1
+		level := sdb.GetScoreByUID(int64(uidint)).Score + 1
 		if level > SCOREMAX {
 			level = SCOREMAX
 			_, err := ctx.SendPlainMessage(true, "你的等级已经达到上限")
@@ -113,7 +113,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}
 		}
-		err = sdb.InsertOrUpdateScoreByUID(uidint, level)
+		err = sdb.InsertOrUpdateScoreByUID(int64(uidint), level)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			return
@@ -123,7 +123,7 @@ func init() {
 		add := 1 + rand.Intn(10) + rank*5 // 等级越高获得的钱越高
 
 		go func() {
-			err = wallet.InsertWalletOf(uidint, add)
+			err = wallet.InsertWalletOf(int64(uidint), add)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				return
@@ -135,7 +135,7 @@ func init() {
 			avatarurl:  ctx.Message.Author.Avatar,
 			nickname:   ctx.Message.Author.Username,
 			inc:        add,
-			score:      wallet.GetWalletOf(uidint),
+			score:      wallet.GetWalletOf(int64(uidint)),
 			level:      level,
 			rank:       rank,
 		}
