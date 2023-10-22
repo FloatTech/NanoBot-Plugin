@@ -183,6 +183,37 @@ nanobot [-Tadhst] ID1 ID2 ...
 </details>
 
 <details>
+  <summary>娶群友</summary>
+
+  `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/qqwife"`
+
+  - [x] 娶群友
+
+  - [x] 群老婆列表
+ 
+  - [x] (娶|嫁)@对方QQ
+ 
+  - [x] 牛@对方QQ
+ 
+  - [x] 闹离婚
+ 
+  - [x] 买礼物给@对方QQ
+ 
+  - [x] 做媒 @攻方QQ @受方QQ
+ 
+  - [x] 查好感度@对方QQ
+ 
+  - [x] 好感度列表
+ 
+  - [x] [允许|禁止]自由恋爱
+ 
+  - [x] [允许|禁止]牛头人
+ 
+  - [x] 设置CD为xx小时    →(默认12小时)
+
+</details>
+
+<details>
   <summary>在线代码运行</summary>
 
   `import _ "github.com/FloatTech/NanoBot-Plugin/plugin/runcode"`
