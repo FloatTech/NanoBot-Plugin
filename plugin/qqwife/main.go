@@ -204,6 +204,6 @@ func init() {
 			_, _ = ctx.SendPlainMessage(false, "main.go.204 ->ERROR: ", err)
 			return
 		}
-		ctx.SendImageBytes(data, false)
+		_, _ = ctx.SendImageBytes(data, false)
 	})
 }
