@@ -309,7 +309,6 @@ func init() {
 			ntrID = fiance
 			targetID = uid
 			greenID = user[1]
-			choicetext = "老公"
 		case user[1] == fiance: // 是0
 			greenID = user[0]
 			choicetext = "老婆"
@@ -649,6 +648,6 @@ func init() {
 			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.62 ->ERROR]:", err)
 			return
 		}
-		ctx.SendImageBytes(data, true)
+		_, _ = ctx.SendImageBytes(data, true)
 	})
 }
