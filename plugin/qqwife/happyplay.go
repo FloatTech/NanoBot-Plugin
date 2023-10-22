@@ -11,7 +11,6 @@ import (
 	"github.com/FloatTech/floatbox/math"
 	"github.com/FloatTech/gg"
 	"github.com/FloatTech/imgfactory"
-	control "github.com/FloatTech/zbputils/control"
 	"github.com/FloatTech/zbputils/img/text"
 	nano "github.com/fumiama/NanoBot"
 	log "github.com/sirupsen/logrus"
@@ -598,7 +597,7 @@ func init() {
 		canvas.SetRGB(1, 1, 1) // 白色
 		canvas.Clear()
 		/***********下载字体***********/
-		data, err := file.GetLazyData(text.BoldFontFile, control.Md5File, true)
+		data, err := file.GetLazyData(text.BoldFontFile, nano.Md5File, true)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.599 ->ERROR]:", err)
 		}

@@ -9,7 +9,6 @@ import (
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
 	"github.com/FloatTech/imgfactory"
 	ctrl "github.com/FloatTech/zbpctrl"
-	control "github.com/FloatTech/zbputils/control"
 	nano "github.com/fumiama/NanoBot"
 
 	"github.com/FloatTech/floatbox/file"
@@ -171,7 +170,7 @@ func init() {
 		canvas.SetRGB(1, 1, 1) // 白色
 		canvas.Clear()
 		/***********下载字体，可以注销掉***********/
-		data, err := file.GetLazyData(text.BoldFontFile, control.Md5File, true)
+		data, err := file.GetLazyData(text.BoldFontFile, nano.Md5File, true)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "main.go.176 ->ERROR: ", err)
 		}
