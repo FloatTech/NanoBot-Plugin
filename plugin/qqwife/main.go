@@ -53,18 +53,18 @@ func init() {
 
 		info, err := wifeData.checkUser(gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[main.go.57 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		uInfo, err := getUserInfoIn(ctx, gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[main.go.62 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if info.Users == "" {
 			menbers, err := ctx.GetGuildMembersIn(gid, "0", 1000)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[main.go.68 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
 			list := make(map[int]userInfo, 1000)
@@ -83,17 +83,17 @@ func init() {
 			if target.ID == uid {
 				err = wifeData.register(gid, uInfo, userInfo{})
 				if err != nil {
-					_, _ = ctx.SendPlainMessage(false, "[main.go.87 ->ERROR]:", err)
+					_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 					return
 				}
 				_, err = ctx.SendChain(nano.At(uid), nano.Text("今日获得成就：单身贵族"))
 				if err != nil {
-					_, _ = ctx.SendPlainMessage(false, "main.go.92 ->ERROR: ", err)
+					_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 				}
 			}
 			info, err = wifeData.checkUser(gid, target.ID)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[main.go.97 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
 			if info.Users != "" {
@@ -102,17 +102,17 @@ func init() {
 			}
 			err = wifeData.register(gid, uInfo, target)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[main.go.106 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
 			favor, err := wifeData.favorFor(uid, target.ID, rand.Intn(5))
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[main.go.111 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
 			_, err = ctx.SendChain(nano.At(uid), nano.Text("\n今天你的群老婆是\n[", target.Nick, "](", target.ID, ")哒\n当前你们好感度为", favor), nano.Image(target.Avatar))
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "main.go.116 ->ERROR: ", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			}
 			return
 		}
@@ -124,27 +124,27 @@ func init() {
 		case users[0] == uid: // 娶过别人
 			favor, err := wifeData.favorFor(uid, users[1], 0)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[main.go.128 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
 			_, err = ctx.SendChain(nano.At(uid),
 				nano.Text("\n今天你在", info.Updatetime, "娶了群友\n[", info.Mname, "](", users[1], ")\n",
 					"当前你们好感度为", favor), nano.Image(info.Mpic))
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "main.go.135 ->ERROR: ", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			}
 			return
 		case users[1] == uid: // 嫁给别人
 			favor, err := wifeData.favorFor(users[0], uid, 0)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[main.go.141 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
 			_, err = ctx.SendChain(nano.At(uid),
 				nano.Text("\n今天你在", info.Updatetime, "被群友\n[", info.Sname, "](", users[0], ")娶了\n",
 					"当前你们好感度为", favor), nano.Image(info.Spic))
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "main.go.148 ->ERROR: ", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			}
 			return
 		}
@@ -153,7 +153,7 @@ func init() {
 		gid := ctx.Message.ChannelID
 		list, err := wifeData.getlist(gid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[main.go.157 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		number := len(list)
@@ -172,13 +172,13 @@ func init() {
 		/***********下载字体，可以注销掉***********/
 		data, err := file.GetLazyData(text.BoldFontFile, nano.Md5File, true)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "main.go.176 ->ERROR: ", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 		}
 		/***********设置字体颜色为黑色***********/
 		canvas.SetRGB(0, 0, 0)
 		/***********设置字体大小,并获取字体高度用来定位***********/
 		if err = canvas.ParseFontFace(data, fontSize*2); err != nil {
-			_, _ = ctx.SendPlainMessage(false, "main.go.182 ->ERROR: ", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			return
 		}
 		sl, h := canvas.MeasureString("群老婆列表")
@@ -187,7 +187,7 @@ func init() {
 		canvas.DrawString("————————————————————", 0, 250-h)
 		/***********设置字体大小,并获取字体高度用来定位***********/
 		if err = canvas.ParseFontFace(data, fontSize); err != nil {
-			_, _ = ctx.SendPlainMessage(false, "main.go.191 ->ERROR: ", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			return
 		}
 		_, h = canvas.MeasureString("焯")
@@ -200,7 +200,7 @@ func init() {
 		}
 		data, err = imgfactory.ToBytes(canvas.Image())
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "main.go.204 ->ERROR: ", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			return
 		}
 		_, _ = ctx.SendImageBytes(data, false)

@@ -3,6 +3,8 @@ package qqwife
 
 import (
 	"errors"
+	"path"
+	"runtime"
 	"strconv"
 	"strings"
 	"sync"
@@ -299,7 +301,7 @@ func (sql *dbData) getGroupFavorability(uid string) (list []favor, err error) {
 	sql.RLock()
 	defer sql.RUnlock()
 	info := favor{}
-	err = sql.db.FindFor("favorability", &info, "where Userinfo glob '*"+uid+"*' ORDER BY DESC", func() error {
+	err = sql.db.FindFor("favorability", &info, "where Userinfo glob '*"+uid+"*' AND Favor > 0 ORDER BY DESC", func() error {
 		var target string
 		userList := strings.Split(info.Users, " & ")
 		switch {
@@ -382,4 +384,12 @@ func (sql *dbData) setCD(uid string, funcType string) error {
 		info.Buy = time.Now().Unix()
 	}
 	return sql.db.Insert("cdsheet", &info)
+}
+
+func getLine() string {
+	_, file, line, ok := runtime.Caller(1)
+	if ok {
+		return path.Base(file) + "." + strconv.Itoa(line)
+	}
+	return ""
 }

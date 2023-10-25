@@ -43,18 +43,18 @@ func init() {
 	engine.OnMessageRegex(`^设置CD为(\d+)小时`, nano.OnlyChannel, nano.AdminPermission, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
 		cdTime, err := strconv.ParseInt(ctx.State["regex_matched"].([]string)[1], 10, 64)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.47 ->ERROR]:请设置纯数字\n", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:请设置纯数字\n", err)
 			return
 		}
 		groupInfo, err := wifeData.getSet(ctx.Message.ChannelID)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.52 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		groupInfo.CDtime = cdTime
 		err = wifeData.updateSet(groupInfo)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.58 ->ERROR]设置CD时长失败\n", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]设置CD时长失败\n", err)
 			return
 		}
 		_, _ = ctx.SendPlainMessage(true, "设置成功")
@@ -65,7 +65,7 @@ func init() {
 		groupInfo, err := wifeData.getSet(ctx.Message.ChannelID)
 		switch {
 		case err != nil:
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.69 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		case mode == "自由恋爱":
 			if status == "允许" {
@@ -82,7 +82,7 @@ func init() {
 		}
 		err = wifeData.updateSet(groupInfo)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.86 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		_, _ = ctx.SendPlainMessage(true, "设置成功")
@@ -92,7 +92,7 @@ func init() {
 		gid := ctx.Message.ChannelID
 		setting, err := wifeData.getSet(gid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.96 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if setting.CanMatch == 0 {
@@ -103,7 +103,7 @@ func init() {
 		choice := ctx.State["regex_matched"].([]string)[1]
 		cdTime, err := wifeData.checkCD(gid, uid, choice)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.107 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if cdTime > 0 {
@@ -113,7 +113,7 @@ func init() {
 		fiance := ctx.State["regex_matched"].([]string)[2]
 		uInfo, err := wifeData.checkUser(gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.117 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if uInfo.Users != "" {
@@ -135,7 +135,7 @@ func init() {
 		}
 		fInfo, err := wifeData.checkUser(gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.139 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if fInfo.Users != "" {
@@ -159,7 +159,7 @@ func init() {
 		}
 		uBook, err := getUserInfoIn(ctx, gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.163 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if uid == fiance { // 如果是自己
@@ -167,7 +167,7 @@ func init() {
 			case 1:
 				err := wifeData.register(gid, uBook, userInfo{})
 				if err != nil {
-					_, _ = ctx.SendPlainMessage(false, "[happyplay.go.171 ->ERROR]:", err)
+					_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 					return
 				}
 				_, _ = ctx.SendPlainMessage(true, "今日获得成就：单身贵族")
@@ -178,12 +178,12 @@ func init() {
 		}
 		fBook, err := getUserInfoIn(ctx, gid, fiance)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.182 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		favor, err := wifeData.favorFor(uid, fiance, 0)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.187 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if favor < 30 {
@@ -204,7 +204,7 @@ func init() {
 			choicetext = "\n今天你的群老公是"
 		}
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.208 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		// 请大家吃席
@@ -213,7 +213,7 @@ func init() {
 				choicetext, "[", fBook.Nick, "](", fiance, ")\n",
 				"当前你们好感度为", favor), nano.Image(fBook.Avatar))
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "happyplay.go.217 ->ERROR: ", err)
+			_, _ = ctx.SendPlainMessage(false, "", getLine(), " ->ERROR: ", err)
 		}
 	})
 	// NTR技能
@@ -221,7 +221,7 @@ func init() {
 		gid := ctx.Message.ChannelID
 		setting, err := wifeData.getSet(gid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.225 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if setting.CanNtr == 0 {
@@ -231,7 +231,7 @@ func init() {
 		uid := ctx.Message.Author.ID
 		cdTime, err := wifeData.checkCD(gid, uid, "牛")
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.235 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if cdTime > 0 {
@@ -241,7 +241,7 @@ func init() {
 		fiance := ctx.State["regex_matched"].([]string)[1]
 		uInfo, err := wifeData.checkUser(gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.245 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if uInfo.Users != "" {
@@ -263,7 +263,7 @@ func init() {
 		}
 		fInfo, err := wifeData.checkUser(gid, fiance)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.267 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if fInfo.Users == "" {
@@ -281,7 +281,7 @@ func init() {
 		}
 		favor, err := wifeData.favorFor(uid, fiance, 0)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.285 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if favor < 30 {
@@ -317,12 +317,12 @@ func init() {
 		}
 		userInfo, err := getUserInfoIn(ctx, gid, ntrID)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.322 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		fianceInfo, err := getUserInfoIn(ctx, gid, targetID)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.327 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		err = wifeData.register(gid, userInfo, fianceInfo)
@@ -332,11 +332,11 @@ func init() {
 		}
 		favor, err = wifeData.favorFor(uid, fiance, -5)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.337 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		}
 		_, err = wifeData.favorFor(uid, greenID, 5)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.341 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		}
 		// 输出结果
 		_, err = ctx.SendChain(nano.ReplyTo(ctx.Message.ID),
@@ -344,7 +344,7 @@ func init() {
 				choicetext, "[", fianceInfo.Nick, "](", fianceInfo.ID, ")\n",
 				"当前你们好感度为", favor), nano.Image(fianceInfo.Avatar))
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.349 ->ERROR]: ", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 		}
 	})
 	// 做媒技能
@@ -353,7 +353,7 @@ func init() {
 		uid := ctx.Message.Author.ID
 		cdTime, err := wifeData.checkCD(gid, uid, "媒")
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.358 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if cdTime > 0 {
@@ -364,7 +364,7 @@ func init() {
 		gaynano := ctx.State["regex_matched"].([]string)[2]
 		uInfo, err := wifeData.checkUser(gid, gayOne)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.369 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if uInfo.Users != "" {
@@ -373,7 +373,7 @@ func init() {
 		}
 		fInfo, err := wifeData.checkUser(gid, gaynano)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.378 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if fInfo.Users != "" {
@@ -387,7 +387,7 @@ func init() {
 		}
 		favor, err := wifeData.favorFor(gayOne, gaynano, 0)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.392 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if favor < 30 {
@@ -396,11 +396,11 @@ func init() {
 		if rand.Intn(101) >= favor {
 			_, err = wifeData.favorFor(uid, gayOne, -1)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[happyplay.go.401 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			}
 			_, err = wifeData.favorFor(uid, gaynano, -1)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[happyplay.go.64052 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			}
 			_, _ = ctx.SendPlainMessage(true, sendtext[1][rand.Intn(len(sendtext[1]))])
 			return
@@ -408,37 +408,37 @@ func init() {
 		// 去民政局登记
 		userInfo, err := getUserInfoIn(ctx, gid, gayOne)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.413 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		fianceInfo, err := getUserInfoIn(ctx, gid, gaynano)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.418 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		err = wifeData.register(gid, userInfo, fianceInfo)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.423 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		_, err = wifeData.favorFor(uid, gayOne, 1)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.428 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		}
 		_, err = wifeData.favorFor(uid, gaynano, 1)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.432 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		}
 		_, err = wifeData.favorFor(gayOne, gaynano, 1)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.436 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		}
 		// 请大家吃席
 		_, err = ctx.SendChain(nano.ReplyTo(ctx.Message.ID),
 			nano.Text("恭喜你成功撮合了一对CP\n\n"), nano.At(gayOne), nano.Text("今天你的群老婆是[", fianceInfo.Nick, "](", fianceInfo.ID, ")"),
 			nano.Image(fianceInfo.Avatar))
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "happyplay.go.443 ->ERROR: ", err)
+			_, _ = ctx.SendPlainMessage(false, "", getLine(), " ->ERROR: ", err)
 		}
 	})
 	engine.OnMessageFullMatchGroup([]string{"闹离婚", "办离婚"}, nano.OnlyChannel, getdb).Limit(ctxext.LimitByUser).SetBlock(true).Handle(func(ctx *nano.Ctx) {
@@ -446,7 +446,7 @@ func init() {
 		uid := ctx.Message.Author.ID
 		cdTime, err := wifeData.checkCD(gid, uid, "离")
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.451 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if cdTime > 0 {
@@ -455,7 +455,7 @@ func init() {
 		}
 		uInfo, err := wifeData.checkUser(gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.460 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if uInfo.Users == "" {
@@ -474,7 +474,7 @@ func init() {
 		}
 		favor, err := wifeData.favorFor(user[0], user[1], 0)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.479 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if favor < 30 {
@@ -486,7 +486,7 @@ func init() {
 		}
 		err = wifeData.divorce(gid, uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.491 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		/*
@@ -503,7 +503,7 @@ func init() {
 		uid := ctx.Message.Author.ID
 		favor, err := wifeData.favorFor(uid, fiance, 0)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.503 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		// 输出结果
@@ -521,7 +521,7 @@ func init() {
 		// 获取CD
 		cdTime, err := wifeData.checkCD(gid, uid, "买")
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.521 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		if cdTime > 0 {
@@ -531,7 +531,7 @@ func init() {
 		// 获取好感度
 		favor, err := wifeData.favorFor(uid, fiance, 0)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.531 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		// 对接小熊饼干
@@ -559,12 +559,12 @@ func init() {
 		// 记录结果
 		err = wallet.InsertWalletOf(uidint64, -moneyToFavor)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.559 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		lastfavor, err := wifeData.favorFor(uid, fiance, newFavor)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.564 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		// 写入CD
@@ -584,14 +584,11 @@ func init() {
 		uid := ctx.Message.Author.ID
 		fianceeInfo, err := wifeData.getGroupFavorability(uid)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.584 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		/***********设置图片的大小和底色***********/
 		number := len(fianceeInfo)
-		if number > 10 {
-			number = 10
-		}
 		fontSize := 50.0
 		canvas := gg.NewContext(1150, int(170+(50+70)*float64(number)))
 		canvas.SetRGB(1, 1, 1) // 白色
@@ -599,13 +596,13 @@ func init() {
 		/***********下载字体***********/
 		data, err := file.GetLazyData(text.BoldFontFile, nano.Md5File, true)
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.599 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		}
 		/***********设置字体颜色为黑色***********/
 		canvas.SetRGB(0, 0, 0)
 		/***********设置字体大小,并获取字体高度用来定位***********/
 		if err = canvas.ParseFontFace(data, fontSize*2); err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.605 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		sl, h := canvas.MeasureString("你的好感度排行列表")
@@ -614,7 +611,7 @@ func init() {
 		canvas.DrawString("————————————————————", 0, 160)
 		/***********设置字体大小,并获取字体高度用来定位***********/
 		if err = canvas.ParseFontFace(data, fontSize); err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.614 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		i := 0
@@ -627,7 +624,7 @@ func init() {
 			}
 			user, err := getUserInfoIn(ctx, gid, info.Users)
 			if err != nil {
-				log.Warnln("[happyplay.go.627 ->ERROR]:", err.Error())
+				log.Warnln("[", getLine(), " ->ERROR]:", err.Error())
 				continue
 			}
 			canvas.SetRGB255(0, 0, 0)
@@ -644,7 +641,7 @@ func init() {
 		}
 		data, err = imgfactory.ToBytes(canvas.Image())
 		if err != nil {
-			_, _ = ctx.SendPlainMessage(false, "[happyplay.go.62 ->ERROR]:", err)
+			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
 		}
 		_, _ = ctx.SendImageBytes(data, true)
