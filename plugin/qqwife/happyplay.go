@@ -46,7 +46,7 @@ func init() {
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:请设置纯数字\n", err)
 			return
 		}
-		groupInfo, err := wifeData.getSet(ctx.Message.ChannelID)
+		groupInfo, err := wifeData.getSet(ctx.Message.GuildID)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 			return
@@ -62,7 +62,7 @@ func init() {
 	engine.OnMessageRegex(`^(允许|禁止)(自由恋爱|牛头人)$`, nano.OnlyChannel, nano.AdminPermission, getdb).SetBlock(true).Handle(func(ctx *nano.Ctx) {
 		status := ctx.State["regex_matched"].([]string)[1]
 		mode := ctx.State["regex_matched"].([]string)[2]
-		groupInfo, err := wifeData.getSet(ctx.Message.ChannelID)
+		groupInfo, err := wifeData.getSet(ctx.Message.GuildID)
 		switch {
 		case err != nil:
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
@@ -89,7 +89,7 @@ func init() {
 	})
 	// 单身技能
 	engine.OnMessageRegex(`^(娶|嫁)\s*<@!(\d+)>$`, nano.OnlyChannel, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		setting, err := wifeData.getSet(gid)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
@@ -210,7 +210,7 @@ func init() {
 		// 请大家吃席
 		_, err = ctx.SendChain(nano.ReplyTo(ctx.Message.ID),
 			nano.Text(sendtext[0][rand.Intn(len(sendtext[0]))], "\n",
-				choicetext, "[", fBook.Nick, "](", fiance, ")\n",
+				choicetext, "[", fBook.Nick, "]\n",
 				"当前你们好感度为", favor), nano.Image(fBook.Avatar))
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "", getLine(), " ->ERROR: ", err)
@@ -218,7 +218,7 @@ func init() {
 	})
 	// NTR技能
 	engine.OnMessageRegex(`^牛\s*<@!(\d+)>$`, nano.OnlyChannel, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		setting, err := wifeData.getSet(gid)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
@@ -341,7 +341,7 @@ func init() {
 		// 输出结果
 		_, err = ctx.SendChain(nano.ReplyTo(ctx.Message.ID),
 			nano.Text(sendtext[2][rand.Intn(len(sendtext[2]))], "\n",
-				choicetext, "[", fianceInfo.Nick, "](", fianceInfo.ID, ")\n",
+				choicetext, "[", fianceInfo.Nick, "]\n",
 				"当前你们好感度为", favor), nano.Image(fianceInfo.Avatar))
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
@@ -349,7 +349,7 @@ func init() {
 	})
 	// 做媒技能
 	engine.OnMessageRegex(`^做媒\s*<@!(\d+)>\s*<@!(\d+)>`, nano.OnlyChannel, nano.AdminPermission, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		uid := ctx.Message.Author.ID
 		cdTime, err := wifeData.checkCD(gid, uid, "媒")
 		if err != nil {
@@ -435,14 +435,14 @@ func init() {
 		}
 		// 请大家吃席
 		_, err = ctx.SendChain(nano.ReplyTo(ctx.Message.ID),
-			nano.Text("恭喜你成功撮合了一对CP\n\n"), nano.At(gayOne), nano.Text("今天你的群老婆是[", fianceInfo.Nick, "](", fianceInfo.ID, ")"),
+			nano.Text("恭喜你成功撮合了一对CP\n\n"), nano.At(gayOne), nano.Text("今天你的群老婆是[", fianceInfo.Nick, "]"),
 			nano.Image(fianceInfo.Avatar))
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "", getLine(), " ->ERROR: ", err)
 		}
 	})
 	engine.OnMessageFullMatchGroup([]string{"闹离婚", "办离婚"}, nano.OnlyChannel, getdb).Limit(ctxext.LimitByUser).SetBlock(true).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		uid := ctx.Message.Author.ID
 		cdTime, err := wifeData.checkCD(gid, uid, "离")
 		if err != nil {
@@ -511,7 +511,7 @@ func init() {
 	})
 	// 礼物系统
 	engine.OnMessageRegex(`^买礼物给\s*<@!(\d+)>`, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		uid := ctx.Message.Author.ID
 		fiance := ctx.State["regex_matched"].([]string)[1]
 		if fiance == uid {
@@ -568,7 +568,7 @@ func init() {
 			return
 		}
 		// 写入CD
-		err = wifeData.setCD(uid, "buy")
+		err = wifeData.setCD(uid, "买")
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(true, "[qqwife]你的技能CD记录失败\n", err)
 		}
@@ -580,7 +580,7 @@ func init() {
 		}
 	})
 	engine.OnMessageFullMatch("好感度列表", nano.OnlyChannel, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		uid := ctx.Message.Author.ID
 		fianceeInfo, err := wifeData.getGroupFavorability(uid)
 		if err != nil {

@@ -79,30 +79,30 @@ var (
 			// 创建群配置表
 			err = wifeData.db.Create("setting", &setting{})
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[dbfile.go.80 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return false
 			}
 			// 创建CD表
 			err = wifeData.db.Create("cdsheet", &cdsheet{})
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[dbfile.go.86 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return false
 			}
 			// 创建好感度表
 			err = wifeData.db.Create("favor", &favor{})
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[dbfile.go.92 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return false
 			}
 			// 刷新列表
-			err = wifeData.refresh(ctx.Message.ChannelID)
+			err = wifeData.refresh(ctx.Message.GuildID)
 			if err != nil {
-				_, _ = ctx.SendPlainMessage(false, "[dbfile.go.98 ->ERROR]:", err)
+				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return false
 			}
 			return true
 		}
-		_, _ = ctx.SendPlainMessage(false, "[dbfile.go.103 ->ERROR]:", err)
+		_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 		return false
 	})
 )
@@ -223,7 +223,7 @@ func (sql *dbData) divorce(gid, uid string) error {
 	return sql.db.Del(gidstr, "where Users glob '*"+uid+"*'")
 }
 
-func (sql *dbData) getlist(gid string) (list [][4]string, err error) {
+func (sql *dbData) getlist(gid string) (list []marriage, err error) {
 	sql.Lock()
 	defer sql.Unlock()
 	gidstr := "group" + gid
@@ -237,13 +237,7 @@ func (sql *dbData) getlist(gid string) (list [][4]string, err error) {
 		if users[0] == "" || users[1] == "" {
 			return nil
 		}
-		dbinfo := [4]string{
-			info.Sname,
-			users[0],
-			info.Mname,
-			users[1],
-		}
-		list = append(list, dbinfo)
+		list = append(list, info)
 		return nil
 	})
 	return
@@ -256,12 +250,12 @@ func slicename(name string, canvas *gg.Context) (resultname string) {
 	for i, v := range usermane {
 		width, _ := canvas.MeasureString(string(v)) // 获取单个字符的宽度
 		widthlen += int(width)
-		if widthlen > 350 {
+		if widthlen > 650 {
 			break // 总宽度不能超过350
 		}
 		numberlen = i
 	}
-	if widthlen > 350 {
+	if widthlen > 650 {
 		resultname = string(usermane[:numberlen-1]) + "......" // 名字切片
 	} else {
 		resultname = name
@@ -277,10 +271,6 @@ func (sql *dbData) favorFor(uid, target string, add int) (favorValue int, err er
 	if err != nil {
 		return
 	}
-	number, _ := sql.db.Count("favor")
-	if number <= 0 {
-		return
-	}
 	key := uid + " & " + target
 	uidInt64, _ := strconv.ParseInt(uid, 10, 64)
 	targetInt64, _ := strconv.ParseInt(target, 10, 64)
@@ -288,7 +278,7 @@ func (sql *dbData) favorFor(uid, target string, add int) (favorValue int, err er
 		key = target + " & " + uid
 	}
 	info := favor{}
-	err = sql.db.Find("favor", &info, "where Userinfo is '"+key+"'")
+	_ = sql.db.Find("favor", &info, "where Users is '"+key+"'")
 	if add > 0 {
 		info.Users = key
 		info.Favor += add
@@ -301,7 +291,7 @@ func (sql *dbData) getGroupFavorability(uid string) (list []favor, err error) {
 	sql.RLock()
 	defer sql.RUnlock()
 	info := favor{}
-	err = sql.db.FindFor("favorability", &info, "where Userinfo glob '*"+uid+"*' AND Favor > 0 ORDER BY DESC", func() error {
+	err = sql.db.FindFor("favor", &info, "where Users glob '*"+uid+"*' AND Favor > 0 ORDER BY DESC", func() error {
 		var target string
 		userList := strings.Split(info.Users, " & ")
 		switch {

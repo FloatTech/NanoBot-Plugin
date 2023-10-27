@@ -37,7 +37,7 @@ var (
 		PrivateDataFolder: "qqwife",
 	}).ApplySingle(nano.NewSingle(
 		nano.WithKeyFn(func(ctx *nano.Ctx) int64 {
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
+			gid, _ := strconv.ParseUint(ctx.Message.GuildID, 10, 64)
 			return int64(gid)
 		}),
 		nano.WithPostFn[int64](func(ctx *nano.Ctx) {
@@ -48,7 +48,7 @@ var (
 
 func init() {
 	engine.OnMessageFullMatch("娶群友", nano.OnlyChannel, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		uid := ctx.Message.Author.ID
 
 		info, err := wifeData.checkUser(gid, uid)
@@ -105,12 +105,12 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
-			favor, err := wifeData.favorFor(uid, target.ID, rand.Intn(5))
+			favor, err := wifeData.favorFor(uid, target.ID, rand.Intn(5)+1)
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
 				return
 			}
-			_, err = ctx.SendChain(nano.At(uid), nano.Text("\n今天你的群老婆是\n[", target.Nick, "](", target.ID, ")哒\n当前你们好感度为", favor), nano.Image(target.Avatar))
+			_, err = ctx.SendChain(nano.At(uid), nano.Text("\n今天你的群老婆是\n[", target.Nick, "]哒\n当前你们好感度为", favor), nano.Image(target.Avatar))
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
 			}
@@ -128,7 +128,7 @@ func init() {
 				return
 			}
 			_, err = ctx.SendChain(nano.At(uid),
-				nano.Text("\n今天你在", info.Updatetime, "娶了群友\n[", info.Mname, "](", users[1], ")\n",
+				nano.Text("\n今天你在", info.Updatetime, "娶了群友[", info.Mname, "]\n",
 					"当前你们好感度为", favor), nano.Image(info.Mpic))
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
@@ -141,7 +141,7 @@ func init() {
 				return
 			}
 			_, err = ctx.SendChain(nano.At(uid),
-				nano.Text("\n今天你在", info.Updatetime, "被群友\n[", info.Sname, "](", users[0], ")娶了\n",
+				nano.Text("\n今天你在", info.Updatetime, "被群友[", info.Sname, "]娶了\n",
 					"当前你们好感度为", favor), nano.Image(info.Spic))
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]: ", err)
@@ -150,7 +150,7 @@ func init() {
 		}
 	})
 	engine.OnMessageFullMatch("群老婆列表", nano.OnlyChannel, getdb).SetBlock(true).Limit(ctxext.LimitByUser).Handle(func(ctx *nano.Ctx) {
-		gid := ctx.Message.ChannelID
+		gid := ctx.Message.GuildID
 		list, err := wifeData.getlist(gid)
 		if err != nil {
 			_, _ = ctx.SendPlainMessage(false, "[", getLine(), " ->ERROR]:", err)
@@ -192,11 +192,9 @@ func init() {
 		}
 		_, h = canvas.MeasureString("焯")
 		for i, info := range list {
-			canvas.DrawString(slicename(info[0], canvas), 0, float64(260+50*i)-h)
-			canvas.DrawString("("+info[1]+")", 350, float64(260+50*i)-h)
+			canvas.DrawString(slicename(info.Sname, canvas), 0, float64(260+50*i)-h)
 			canvas.DrawString("←→", 700, float64(260+50*i)-h)
-			canvas.DrawString(slicename(info[2], canvas), 800, float64(260+50*i)-h)
-			canvas.DrawString("("+info[3]+")", 1150, float64(260+50*i)-h)
+			canvas.DrawString(slicename(info.Mname, canvas), 800, float64(260+50*i)-h)
 		}
 		data, err = imgfactory.ToBytes(canvas.Image())
 		if err != nil {
