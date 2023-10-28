@@ -283,6 +283,41 @@ nanobot [-Tadhst] ID1 ID2 ...
 
 </details>
 
+<details>
+  <summary>llm适配器</summary>
+
+  `import _ "github.com/bincooo/llm-plugin"`
+
+  - [x] 全局属性
+
+  - [x] [添加|修改]全局属性 xxx
+
+  - [x] AI列表
+
+  - [x] 切换AI xxx
+
+  - [x] 凭证列表
+
+  - [x] 凭证明细 xxx
+
+  - [x] [添加|修改]凭证 xxx
+
+  - [x] 切换凭证 [凭证名]
+
+  - [x] 删除凭证 xxx
+
+  - [x] 预设列表
+
+  - [x] 预设明细 xxx
+
+  - [x] [开启|切换]预设 + [预设名]
+
+  - [x] 删除预设 xxx
+
+  - [x] [昵称前缀|@bot] + 文本内容 进行对话
+
+</details>
+
 
 ## 特别感谢
 
