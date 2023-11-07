@@ -27,7 +27,7 @@ var Banner = "* QQ + NanoBot + Golang\n" +
 	"* Project: https://github.com/FloatTech/NanoBot-Plugin"
 `
 
-const timeformat = `2006-01-02 15:04:05 +0900`
+const timeformat = `2006-01-02 15:04:05 +0900 JST`
 
 func main() {
 	f, err := os.Create("banner/banner.go")
