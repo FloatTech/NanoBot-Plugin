@@ -12,7 +12,7 @@ require (
 	github.com/FloatTech/zbpctrl v1.6.0
 	github.com/FloatTech/zbputils v1.7.1-0.20231017135158-7e6c839764eb
 	github.com/disintegration/imaging v1.6.2
-	github.com/fumiama/NanoBot v0.0.0-20231107124856-c9f27c651473
+	github.com/fumiama/NanoBot v0.0.0-20231112065640-57b0a7c52c07
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/go-registry v0.2.6
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
