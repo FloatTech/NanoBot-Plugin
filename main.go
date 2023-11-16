@@ -70,9 +70,9 @@ func main() {
 	if *debug {
 		logrus.SetLevel(logrus.DebugLevel)
 	}
-	intent := uint32(nano.IntentPrivate)
+	intent := uint32(nano.IntentGuildPrivate)
 	if *onlypublic {
-		intent = nano.IntentPublic
+		intent = nano.IntentGuildPublic
 	}
 
 	sus := make([]string, 0, 16)
