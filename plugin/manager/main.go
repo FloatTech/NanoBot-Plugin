@@ -2,6 +2,7 @@
 package manager
 
 import (
+	"strconv"
 	"strings"
 
 	nano "github.com/fumiama/NanoBot"
@@ -17,15 +18,30 @@ func init() {
 	})
 	en.OnMessageCommand("exposeid").SetBlock(true).
 		Handle(func(ctx *nano.Ctx) {
-			msg := "*报告*\n- 频道ID: `" + ctx.Message.ChannelID + "`"
-			for _, e := range strings.Split(ctx.State["args"].(string), " ") {
-				e = strings.TrimSpace(e)
-				if e == "" {
-					continue
+			msg := ""
+			if nano.OnlyQQ(ctx) {
+				msg = "*报告*\n- 群ID: `" + strconv.FormatInt(int64(ctx.GroupID()), 10) + "`"
+				for _, e := range strings.Split(ctx.State["args"].(string), " ") {
+					e = strings.TrimSpace(e)
+					if e == "" {
+						continue
+					}
+					if strings.HasPrefix(e, "<@!") {
+						uid := strings.TrimSuffix(e[3:], ">")
+						msg += "\n- 用户: " + e + " ID: `" + uid + "`"
+					}
 				}
-				if strings.HasPrefix(e, "<@!") {
-					uid := strings.TrimSuffix(e[3:], ">")
-					msg += "\n- 用户: " + e + " ID: `" + uid + "`"
+			} else {
+				msg = "*报告*\n- 频道ID: `" + ctx.Message.ChannelID + "`"
+				for _, e := range strings.Split(ctx.State["args"].(string), " ") {
+					e = strings.TrimSpace(e)
+					if e == "" {
+						continue
+					}
+					if strings.HasPrefix(e, "<@!") {
+						uid := strings.TrimSuffix(e[3:], ">")
+						msg += "\n- 用户: " + e + " ID: `" + uid + "`"
+					}
 				}
 			}
 			_, _ = ctx.SendPlainMessage(true, msg)
