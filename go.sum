@@ -36,8 +36,8 @@ github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 h1:BBade+Jl
 github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4/go.mod h1:H7chHJglrhPPzetLdzBleF8d22WYOv7UM/lEKYiwlKM=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 h1:Yzb9+7DPaBjB8zlTR87/ElzFsnQfuHnVUVqpZZIcV5Y=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5/go.mod h1:a2zkGnVExMxdzMo3M0Hi/3sEU+cWnZpSni0O6/Yb/P0=
-github.com/fumiama/NanoBot v0.0.0-20231116150429-c9ba2f735069 h1:uwCFQhF24TEYh3h3rWc++vZBAYbl9+hwJ/Q6MOYXbdQ=
-github.com/fumiama/NanoBot v0.0.0-20231116150429-c9ba2f735069/go.mod h1:kpkfUjFBbYdjiYyaNMZjSM3i4Gy4BTlbSSocRIoSSXQ=
+github.com/fumiama/NanoBot v0.0.0-20231117050254-594c9fddfe7c h1:V27WwUqocpnwRejN+tyVjlZgARm04LQ+TBsd6mbp640=
+github.com/fumiama/NanoBot v0.0.0-20231117050254-594c9fddfe7c/go.mod h1:z9IDRRwntGIrnnxcwgjVge7lUa2GkGWFT7F1uYZbvh8=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b h1:Zt3pFQditAdWTHCOVkiloc9ZauBoWrb37guFV4iIRvE=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/fumiama/cron v1.3.0 h1:ZWlwuexF+HQHl3cYytEE5HNwD99q+3vNZF1GrEiXCFo=
@@ -52,6 +52,8 @@ github.com/fumiama/gofastTEA v0.0.10 h1:JJJ+brWD4kie+mmK2TkspDXKzqq0IjXm89aGYfoG
 github.com/fumiama/gofastTEA v0.0.10/go.mod h1:RIdbYZyB4MbH6ZBlPymRaXn3cD6SedlCu5W/HHfMPBk=
 github.com/fumiama/imgsz v0.0.2 h1:fAkC0FnIscdKOXwAxlyw3EUba5NzxZdSxGaq3Uyfxak=
 github.com/fumiama/imgsz v0.0.2/go.mod h1:dR71mI3I2O5u6+PCpd47M9TZptzP+39tRBcbdIkoqM4=
+github.com/fumiama/imoto v0.1.3 h1:7KNVUIVaLWerdZZ6i83dAvcLoeqzlGhrY2MSjqWTxlY=
+github.com/fumiama/imoto v0.1.3/go.mod h1:1MLP+qfEbhZOn+ETXd6k0xkjMyNGuqnaiblcQuWu9NQ=
 github.com/fumiama/jieba v0.0.0-20221203025406-36c17a10b565 h1:sQuR2+N5HurnvsZhiKdEg+Ig354TaqgCQRxd/0KgIOQ=
 github.com/fumiama/jieba v0.0.0-20221203025406-36c17a10b565/go.mod h1:UUEvyLTJ7yoOA/viKG4wEis4ERydM7+Ny6gZUWgkS80=
 github.com/fumiama/sqlite3 v1.20.0-with-win386 h1:ZR1AXGBEtkfq9GAXehOVcwn+aaCG8itrkgEsz4ggx5k=

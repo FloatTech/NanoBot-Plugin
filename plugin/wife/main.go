@@ -4,7 +4,6 @@ package wife
 import (
 	"encoding/json"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
@@ -45,7 +44,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: 未获取到用户")
 				return
 			}
-			uidint, _ := strconv.ParseInt(uid, 10, 64)
+			uidint := int64(ctx.UserID())
 			card := cards[fcext.RandSenderPerDayN(uidint, len(cards))]
 			data, err := engine.GetLazyData("wives/"+card, true)
 			card, _, _ = strings.Cut(card, ".")

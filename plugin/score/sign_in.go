@@ -5,7 +5,6 @@ import (
 	"math"
 	"math/rand"
 	"os"
-	"strconv"
 	"strings"
 	"time"
 
@@ -68,7 +67,7 @@ func init() {
 			_, _ = ctx.SendPlainMessage(false, "ERROR: 未获取到用户uid")
 			return
 		}
-		uidint, _ := strconv.ParseUint(uid, 10, 64)
+		uidint := ctx.UserID()
 		today := time.Now().Format("20060102")
 		// 签到图片
 		drawedFile := cachePath + uid + today + "signin.png"

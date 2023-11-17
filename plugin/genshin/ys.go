@@ -10,7 +10,6 @@ import (
 	"image/png"
 	"math/rand"
 	"regexp"
-	"strconv"
 	"strings"
 	"sync/atomic"
 
@@ -50,7 +49,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "找不到服务!")
 				return
 			}
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
+			gid := ctx.GroupID()
 			store := (storage)(c.GetData(int64(gid)))
 			if store.setmode(!store.is5starsmode()) {
 				process.SleepAbout1sTo2s()
@@ -88,7 +87,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, "找不到服务!")
 				return
 			}
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
+			gid := ctx.GroupID()
 			store := (storage)(c.GetData(int64(gid)))
 			img, str, mode, err := randnums(10, store)
 			if err != nil {

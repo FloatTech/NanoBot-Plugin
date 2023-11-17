@@ -7,7 +7,6 @@ import (
 	"image/color"
 	"math/rand"
 	"sort"
-	"strconv"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -68,8 +67,7 @@ func init() {
 		PublicDataFolder: "Wordle",
 	}).ApplySingle(nano.NewSingle(
 		nano.WithKeyFn(func(ctx *nano.Ctx) int64 {
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
-			return int64(gid)
+			return int64(ctx.GroupID())
 		}),
 		nano.WithPostFn[int64](func(ctx *nano.Ctx) {
 			_, _ = ctx.SendPlainMessage(true, "已经有正在进行的游戏了")
@@ -138,9 +136,9 @@ func init() {
 				return
 			}
 			var next *nano.FutureEvent
-			if ctx.State["regex_matched"].([]string)[1] == "团队" && !nano.OnlyDirect(ctx) {
+			if ctx.State["regex_matched"].([]string)[1] == "团队" && !nano.OnlyPrivate(ctx) {
 				next = nano.NewFutureEvent("Message", 999, false, nano.RegexRule(fmt.Sprintf(`^([A-Z]|[a-z]){%d}$`, class)),
-					nano.OnlyChannel, nano.CheckChannel(ctx.Message.ChannelID))
+					nano.OnlyPublic, nano.CheckChannel(ctx.Message.ChannelID))
 			} else {
 				next = nano.NewFutureEvent("Message", 999, false, nano.RegexRule(fmt.Sprintf(`^([A-Z]|[a-z]){%d}$`, class)),
 					ctx.CheckSession())
@@ -167,7 +165,7 @@ func init() {
 				case c := <-recv:
 					tick.Reset(105 * time.Second)
 					after.Reset(120 * time.Second)
-					win, img, err = game(c.Message.Content)
+					win, img, err = game(strings.TrimSpace(c.Message.Content))
 					switch {
 					case win:
 						tick.Stop()

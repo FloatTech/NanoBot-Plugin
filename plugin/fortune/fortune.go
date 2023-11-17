@@ -56,7 +56,7 @@ func init() {
 		PublicDataFolder: "Fortune",
 	}).ApplySingle(nano.NewSingle(
 		nano.WithKeyFn(func(ctx *nano.Ctx) int64 {
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
+			gid := ctx.GroupID()
 			return int64(gid)
 		}),
 		nano.WithPostFn[int64](func(ctx *nano.Ctx) {
@@ -72,7 +72,7 @@ func init() {
 	}
 	en.OnMessageRegex(`^设置底图\s?(.*)`).SetBlock(true).
 		Handle(func(ctx *nano.Ctx) {
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
+			gid := ctx.GroupID()
 			i, ok := index[ctx.State["regex_matched"].([]string)[1]]
 			if ok {
 				c, ok := ctx.State["manager"].(*ctrl.Control[*nano.Ctx])
@@ -113,7 +113,7 @@ func init() {
 		Handle(func(ctx *nano.Ctx) {
 			// 获取该群背景类型，默认车万
 			kind := "车万"
-			gid, _ := strconv.ParseUint(ctx.Message.ChannelID, 10, 64)
+			gid := ctx.GroupID()
 			logrus.Debugln("[fortune]gid:", ctx.Message.ChannelID, "uid:", ctx.Message.Author.ID)
 			c, ok := ctx.State["manager"].(*ctrl.Control[*nano.Ctx])
 			if ok {
@@ -130,7 +130,7 @@ func init() {
 				return
 			}
 
-			uid, _ := strconv.ParseUint(ctx.Message.Author.ID, 10, 64)
+			uid := ctx.UserID()
 
 			// 随机获取背景
 			background, index, err := randimage(zipfile, int64(uid))

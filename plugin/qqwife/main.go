@@ -3,7 +3,6 @@ package qqwife
 
 import (
 	"math/rand"
-	"strconv"
 	"strings"
 
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
@@ -37,8 +36,7 @@ var (
 		PrivateDataFolder: "qqwife",
 	}).ApplySingle(nano.NewSingle(
 		nano.WithKeyFn(func(ctx *nano.Ctx) int64 {
-			gid, _ := strconv.ParseUint(ctx.Message.GuildID, 10, 64)
-			return int64(gid)
+			return int64(ctx.GroupID())
 		}),
 		nano.WithPostFn[int64](func(ctx *nano.Ctx) {
 			_, _ = ctx.SendPlainMessage(true, "别着急，民政局门口排长队了！")

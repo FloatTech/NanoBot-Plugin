@@ -16,10 +16,9 @@ import (
 //	并发时返回 "您有操作正在执行, 请稍后再试!"
 var DefaultSingle = nano.NewSingle(
 	nano.WithKeyFn(func(ctx *nano.Ctx) int64 {
-		switch msg := ctx.Value.(type) {
+		switch ctx.Value.(type) {
 		case *nano.Message:
-			id, _ := strconv.ParseUint(msg.Author.ID, 10, 64)
-			return int64(id)
+			return int64(ctx.UserID())
 		}
 		return 0
 	}),
@@ -53,17 +52,26 @@ func SetDefaultLimiterManagerParam(interval time.Duration, burst int) {
 //
 //	按 发送者 限制
 func LimitByUser(ctx *nano.Ctx) *rate.Limiter {
-	if msg, ok := ctx.Value.(*nano.Message); ok {
-		id, _ := strconv.ParseUint(msg.Author.ID, 10, 64)
-		return defaultLimiterManager.Load(int64(id))
+	if _, ok := ctx.Value.(*nano.Message); ok {
+		return defaultLimiterManager.Load(int64(ctx.UserID()))
 	}
 	return defaultLimiterManager.Load(0)
 }
 
 // LimitByGroup 默认限速器 每 10s 5次触发
 //
-//	按 guild 限制
+//	按 group 限制
 func LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
+	if _, ok := ctx.Value.(*nano.Message); ok {
+		return defaultLimiterManager.Load(int64(ctx.GroupID()))
+	}
+	return defaultLimiterManager.Load(0)
+}
+
+// LimitByGuild 默认限速器 每 10s 5次触发
+//
+//	按 guild 限制
+func LimitByGuild(ctx *nano.Ctx) *rate.Limiter {
 	if msg, ok := ctx.Value.(*nano.Message); ok {
 		id, _ := strconv.ParseUint(msg.GuildID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
@@ -75,9 +83,8 @@ func LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
 //
 //	按 channel 限制
 func LimitByChannel(ctx *nano.Ctx) *rate.Limiter {
-	if msg, ok := ctx.Value.(*nano.Message); ok {
-		id, _ := strconv.ParseUint(msg.ChannelID, 10, 64)
-		return defaultLimiterManager.Load(int64(id))
+	if _, ok := ctx.Value.(*nano.Message); ok {
+		return defaultLimiterManager.Load(int64(ctx.GroupID()))
 	}
 	return defaultLimiterManager.Load(0)
 }
@@ -97,8 +104,18 @@ func NewLimiterManager(interval time.Duration, burst int) (m LimiterManager) {
 //
 //	按 发送者 限制
 func (m LimiterManager) LimitByUser(ctx *nano.Ctx) *rate.Limiter {
+	if _, ok := ctx.Value.(*nano.Message); ok {
+		return defaultLimiterManager.Load(int64(ctx.UserID()))
+	}
+	return defaultLimiterManager.Load(0)
+}
+
+// LimitByGuild 自定义限速器
+//
+//	按 guild 限制
+func (m LimiterManager) LimitByGuild(ctx *nano.Ctx) *rate.Limiter {
 	if msg, ok := ctx.Value.(*nano.Message); ok {
-		id, _ := strconv.ParseUint(msg.Author.ID, 10, 64)
+		id, _ := strconv.ParseUint(msg.GuildID, 10, 64)
 		return defaultLimiterManager.Load(int64(id))
 	}
 	return defaultLimiterManager.Load(0)
@@ -106,11 +123,10 @@ func (m LimiterManager) LimitByUser(ctx *nano.Ctx) *rate.Limiter {
 
 // LimitByGroup 自定义限速器
 //
-//	按 guild 限制
+//	按 group 限制
 func (m LimiterManager) LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
-	if msg, ok := ctx.Value.(*nano.Message); ok {
-		id, _ := strconv.ParseUint(msg.GuildID, 10, 64)
-		return defaultLimiterManager.Load(int64(id))
+	if _, ok := ctx.Value.(*nano.Message); ok {
+		return defaultLimiterManager.Load(int64(ctx.GroupID()))
 	}
 	return defaultLimiterManager.Load(0)
 }
@@ -119,9 +135,8 @@ func (m LimiterManager) LimitByGroup(ctx *nano.Ctx) *rate.Limiter {
 //
 //	按 channel 限制
 func (m LimiterManager) LimitByChannel(ctx *nano.Ctx) *rate.Limiter {
-	if msg, ok := ctx.Value.(*nano.Message); ok {
-		id, _ := strconv.ParseUint(msg.ChannelID, 10, 64)
-		return defaultLimiterManager.Load(int64(id))
+	if _, ok := ctx.Value.(*nano.Message); ok {
+		return defaultLimiterManager.Load(int64(ctx.GroupID()))
 	}
 	return defaultLimiterManager.Load(0)
 }
