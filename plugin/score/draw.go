@@ -50,8 +50,8 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 
 	var blurback, scbackimg, backshadowimg, avatarimg, avatarbackimg, avatarshadowimg, whitetext, blacktext image.Image
 	var wg sync.WaitGroup
-	wg.Add(8)
 
+	wg.Add(2)
 	go func() {
 		defer wg.Done()
 		scback := gg.NewContext(canvas.W(), canvas.H())
@@ -67,6 +67,7 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 		scbackimg = rendercard.Fillet(scback.Image(), 12)
 	}()
 
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		pureblack := gg.NewContext(canvas.W(), canvas.H())
@@ -83,23 +84,26 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 
 	aw, ah := (ch-sch)/2/2/2*3, (ch-sch)/2/2/2*3
 
-	go func() {
-		defer wg.Done()
-		avatar, _, err := image.Decode(bytes.NewReader(getAvatar))
-		if err != nil {
-			return
-		}
+	if getAvatar != nil {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			avatar, _, err := image.Decode(bytes.NewReader(getAvatar))
+			if err != nil {
+				return
+			}
 
-		isc := (ch - sch) / 2 / 2 / 2 * 3 / float64(avatar.Bounds().Dy())
+			isc := (ch - sch) / 2 / 2 / 2 * 3 / float64(avatar.Bounds().Dy())
 
-		scavatar := gg.NewContext(int(aw), int(ah))
+			scavatar := gg.NewContext(int(aw), int(ah))
 
-		scavatar.ScaleAbout(isc, isc, aw/2, ah/2)
-		scavatar.DrawImageAnchored(avatar, scavatar.W()/2, scavatar.H()/2, 0.5, 0.5)
-		scavatar.Identity()
+			scavatar.ScaleAbout(isc, isc, aw/2, ah/2)
+			scavatar.DrawImageAnchored(avatar, scavatar.W()/2, scavatar.H()/2, 0.5, 0.5)
+			scavatar.Identity()
 
-		avatarimg = rendercard.Fillet(scavatar.Image(), 8)
-	}()
+			avatarimg = rendercard.Fillet(scavatar.Image(), 8)
+		}()
+	}
 
 	err = canvas.ParseFontFace(fontdata, (ch-sch)/2/2/2)
 	if err != nil {
@@ -107,16 +111,19 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 	}
 	namew, _ := canvas.MeasureString(a.nickname)
 
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		avatarshadowimg = imaging.Blur(customrectangle(cw, ch, aw, ah, namew, color.Black), 8)
 	}()
 
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		avatarbackimg = customrectangle(cw, ch, aw, ah, namew, colors[0])
 	}()
 
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		whitetext, err = customtext(a, fontdata, cw, ch, aw, color.White)
@@ -125,6 +132,7 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 		}
 	}()
 
+	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		blacktext, err = customtext(a, fontdata, cw, ch, aw, color.Black)

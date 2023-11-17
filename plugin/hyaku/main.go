@@ -21,7 +21,7 @@ import (
 	"github.com/FloatTech/NanoBot-Plugin/utils/ctxext"
 )
 
-const bed = "https://gitcode.net/u011570312/OguraHyakuninIsshu/-/raw/master/"
+const bed = "https://gitea.seku.su/fumiama/OguraHyakuninIsshu/raw/branch/master/"
 
 //nolint:asciicheck, structcheck
 type line struct {

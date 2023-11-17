@@ -132,11 +132,15 @@ func init() {
 			drawedfile: drawedFile,
 			picfile:    picFile,
 			avatarurl:  ctx.Message.Author.Avatar,
-			nickname:   ctx.Message.Author.Username,
 			inc:        add,
 			score:      wallet.GetWalletOf(int64(uidint)),
 			level:      level,
 			rank:       rank,
+		}
+		if ctx.Message.Author.Username != "" {
+			alldata.nickname = ctx.Message.Author.Username
+		} else {
+			alldata.nickname = "您好"
 		}
 		drawimage, err := floatstyle(alldata)
 		if err != nil {
@@ -294,6 +298,9 @@ func getrank(count int) int {
 }
 
 func initPic(picFile string, avatarurl string) (avatar []byte, err error) {
+	if avatarurl == "" {
+		return
+	}
 	defer process.SleepAbout1sTo2s()
 	avatar, err = web.GetData(avatarurl)
 	if err != nil {

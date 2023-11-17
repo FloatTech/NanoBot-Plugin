@@ -20,7 +20,7 @@ func init() {
 		Handle(func(ctx *nano.Ctx) {
 			msg := ""
 			if nano.OnlyQQ(ctx) {
-				msg = "*报告*\n- 群ID: `" + strconv.FormatInt(int64(ctx.GroupID()), 10) + "`"
+				msg = "*报告*\n- 群ID: `" + strconv.FormatInt(int64(ctx.GroupID()), 10) + "`\n- 触发用户ID: `" + strconv.FormatInt(int64(ctx.UserID()), 10) + "`"
 				for _, e := range strings.Split(ctx.State["args"].(string), " ") {
 					e = strings.TrimSpace(e)
 					if e == "" {

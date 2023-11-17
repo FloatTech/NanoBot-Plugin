@@ -26,20 +26,31 @@ func init() {
 			"JavaScript || TypeScript || PHP || Shell \n" +
 			"Kotlin  || Rust || Erlang || Ruby || Swift \n" +
 			"R || VB || Py2 || Perl || Pascal || Scala",
-	}).ApplySingle(ctxext.DefaultSingle).OnMessageRegex(`^&gt;runcode(raw)?\s(.+?)\s([\s\S]+)$`).SetBlock(true).Limit(ctxext.LimitByUser).
+	}).ApplySingle(ctxext.DefaultSingle).OnMessageRegex(`^\s*[(&gt;)>]runcode(raw)?\s(.+?)\s([\s\S]+)$`).SetBlock(true).Limit(ctxext.LimitByUser).
 		Handle(func(ctx *nano.Ctx) {
 			israw := ctx.State["regex_matched"].([]string)[1] != ""
 			language := ctx.State["regex_matched"].([]string)[2]
 			language = strings.ToLower(language)
 			if _, exist := runoob.LangTable[language]; !exist {
 				// 不支持语言
-				_, _ = ctx.SendPlainMessage(false, nano.MessageEscape("> "+ctx.Message.Author.Username+"\n语言不是受支持的编程语种呢~"))
+				msg := "> " + ctx.Message.Author.Username + "\n语言" + language + "不是受支持的编程语种呢~"
+				if nano.OnlyQQ(ctx) {
+					_, _ = ctx.SendPlainMessage(false, msg)
+				} else {
+					_, _ = ctx.SendPlainMessage(false, nano.MessageEscape(msg))
+				}
 			} else {
 				// 执行运行
 				block := ctx.State["regex_matched"].([]string)[3]
 				switch block {
 				case "help":
-					_, err := ctx.SendPlainMessage(false, nano.MessageEscape("> "+ctx.Message.Author.Username+"  "+language+"-template:\n>runcode "+language+"\n"+runoob.Templates[language]))
+					msg := "> " + ctx.Message.Author.Username + "  " + language + "-template:\n>runcode " + language + "\n" + runoob.Templates[language]
+					var err error
+					if nano.OnlyQQ(ctx) {
+						_, err = ctx.SendPlainMessage(false, msg)
+					} else {
+						_, err = ctx.SendPlainMessage(false, nano.MessageEscape(msg))
+					}
 					if err != nil {
 						_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 					}
@@ -53,7 +64,11 @@ func init() {
 						_, err = ctx.SendPlainMessage(false, output)
 					} else {
 						head := "> " + ctx.Message.Author.Username + "\n"
-						_, err = ctx.SendPlainMessage(false, nano.MessageEscape(head+output))
+						if nano.OnlyQQ(ctx) {
+							_, err = ctx.SendPlainMessage(false, head+output)
+						} else {
+							_, err = ctx.SendPlainMessage(false, nano.MessageEscape(head+output))
+						}
 					}
 					if err != nil {
 						_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)

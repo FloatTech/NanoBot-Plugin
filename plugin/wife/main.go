@@ -49,13 +49,21 @@ func init() {
 			data, err := engine.GetLazyData("wives/"+card, true)
 			card, _, _ = strings.Cut(card, ".")
 			if err != nil {
-				_, err = ctx.SendChain(nano.At(uid), nano.Text("今天的二次元老婆是~【", card, "】哒\n【图片下载失败: ", err, "】"))
+				if nano.OnlyQQ(ctx) {
+					_, err = ctx.SendChain(nano.Text("今天的二次元老婆是~【", card, "】哒\n【图片下载失败: ", err, "】"))
+				} else {
+					_, err = ctx.SendChain(nano.At(uid), nano.Text("今天的二次元老婆是~【", card, "】哒\n【图片下载失败: ", err, "】"))
+				}
 				if err != nil {
 					_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 				}
 				return
 			}
-			_, err = ctx.SendChain(nano.At(uid), nano.Text("今天的二次元老婆是~【", card, "】哒"), nano.ImageBytes(data))
+			if nano.OnlyQQ(ctx) {
+				_, err = ctx.SendChain(nano.Text("今天的二次元老婆是~【", card, "】哒"), nano.ImageBytes(data))
+			} else {
+				_, err = ctx.SendChain(nano.At(uid), nano.Text("今天的二次元老婆是~【", card, "】哒"), nano.ImageBytes(data))
+			}
 			if err != nil {
 				_, _ = ctx.SendPlainMessage(false, "ERROR: ", err)
 			}
