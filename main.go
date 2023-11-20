@@ -57,6 +57,7 @@ func main() {
 	loadconfig := flag.String("c", "", "load from config")
 	sandbox := flag.Bool("sandbox", false, "run in sandbox api")
 	onlypublic := flag.Bool("public", false, "only listen to public intent")
+	addqqintent := flag.Bool("qq", false, "also listen QQ intent")
 	shardindex := flag.Uint("shardindex", 0, "shard index")
 	shardcount := flag.Uint("shardcount", 0, "shard count")
 	savecfg := flag.String("save", "", "save bot config to filename (eg. config.yaml)")
@@ -73,6 +74,9 @@ func main() {
 	intent := uint32(nano.IntentGuildPrivate)
 	if *onlypublic {
 		intent = nano.IntentGuildPublic
+	}
+	if *addqqintent {
+		intent |= nano.IntentQQ
 	}
 
 	sus := make([]string, 0, 16)
