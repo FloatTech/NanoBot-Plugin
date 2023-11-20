@@ -142,7 +142,7 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 	}()
 
 	wg.Wait()
-	if scbackimg == nil || backshadowimg == nil || avatarimg == nil || avatarbackimg == nil || avatarshadowimg == nil || whitetext == nil || blacktext == nil {
+	if scbackimg == nil || backshadowimg == nil || avatarbackimg == nil || avatarshadowimg == nil || whitetext == nil || blacktext == nil {
 		err = errors.New("图片渲染失败")
 		return
 	}
@@ -157,7 +157,9 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 
 	canvas.DrawImage(avatarshadowimg, 0, 0)
 	canvas.DrawImage(avatarbackimg, 0, 0)
-	canvas.DrawImageAnchored(avatarimg, int((ch-sch)/2/2), int((ch-sch)/2/2), 0.5, 0.5)
+	if avatarimg != nil {
+		canvas.DrawImageAnchored(avatarimg, int((ch-sch)/2/2), int((ch-sch)/2/2), 0.5, 0.5)
+	}
 
 	canvas.DrawImage(blacktext, 2, 2)
 	canvas.DrawImage(whitetext, 0, 0)
