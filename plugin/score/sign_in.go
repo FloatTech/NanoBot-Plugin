@@ -298,14 +298,13 @@ func getrank(count int) int {
 }
 
 func initPic(picFile string, avatarurl string) (avatar []byte, err error) {
-	if avatarurl == "" {
-		return
+	if avatarurl != "" {
+		avatar, err = web.GetData(avatarurl)
+		if err != nil {
+			return
+		}
 	}
 	defer process.SleepAbout1sTo2s()
-	avatar, err = web.GetData(avatarurl)
-	if err != nil {
-		return
-	}
 	if file.IsExist(picFile) {
 		return
 	}
