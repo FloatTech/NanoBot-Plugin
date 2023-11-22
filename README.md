@@ -38,6 +38,8 @@ nanobot [参数] ID1 ID2 ...
         shard count
   -shardindex uint
         shard index
+  -superallqq
+        make all QQ users to be SuperUser
   -t string
         qq api token
 ```
