@@ -7,6 +7,7 @@ import (
 	"image"
 	"image/color"
 	"math"
+	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -25,7 +26,7 @@ import (
 
 	nano "github.com/fumiama/NanoBot"
 
-	"github.com/FloatTech/AnimeAPI/bilibili"
+	"github.com/FloatTech/AnimeAPI/setu"
 	"github.com/FloatTech/floatbox/file"
 	"github.com/FloatTech/floatbox/web"
 	"github.com/FloatTech/gg"
@@ -35,11 +36,6 @@ import (
 	"github.com/FloatTech/zbputils/img/text"
 
 	"github.com/FloatTech/NanoBot-Plugin/kanban/banner"
-)
-
-const (
-	backgroundURL = "https://iw233.cn/api.php?sort=mp"
-	referer       = "https://weibo.com/"
 )
 
 var (
@@ -104,11 +100,11 @@ func drawstatus(m *ctrl.Control[*nano.Ctx], botavartarurl, botname string) (send
 
 	dldata := (*[]byte)(atomic.LoadPointer((*unsafe.Pointer)(unsafe.Pointer(&bgdata))))
 	if dldata == (*[]byte)(nil) || uintptr(time.Since(boottime).Hours()/24) >= atomic.LoadUintptr(&bgcount) {
-		url, err1 := bilibili.GetRealURL(backgroundURL)
+		pic, err1 := setu.DefaultPool.Roll("")
 		if err1 != nil {
 			return nil, err1
 		}
-		data, err1 := web.RequestDataWith(web.NewDefaultClient(), url, "", referer, "", nil)
+		data, err1 := os.ReadFile(pic)
 		if err1 != nil {
 			return nil, err1
 		}

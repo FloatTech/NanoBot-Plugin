@@ -26,10 +26,11 @@ func floatstyle(a *scoredata) (img image.Image, err error) {
 		return
 	}
 
-	getAvatar, err := initPic(a.picfile, a.avatarurl)
+	picFile, getAvatar, err := initPic(a.avatarurl)
 	if err != nil {
 		return
 	}
+	a.picfile = picFile
 
 	back, err := gg.LoadImage(a.picfile)
 	if err != nil {
@@ -204,7 +205,7 @@ func customtext(a *scoredata, fontdata []byte, cw, ch, aw float64, textcolor col
 	if a.rank < 10 {
 		nextrankScore = rankArray[a.rank+1]
 	} else {
-		nextrankScore = SCOREMAX
+		nextrankScore = scoreMax
 	}
 	nextLevelStyle := strconv.Itoa(a.level) + "/" + strconv.Itoa(nextrankScore)
 

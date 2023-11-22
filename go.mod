@@ -12,7 +12,7 @@ require (
 	github.com/FloatTech/zbpctrl v1.6.0
 	github.com/FloatTech/zbputils v1.7.1-0.20231017135158-7e6c839764eb
 	github.com/disintegration/imaging v1.6.2
-	github.com/fumiama/NanoBot v0.0.0-20231117141225-3c2b37d5d79d
+	github.com/fumiama/NanoBot v0.0.0-20231122085036-99b256c0433b
 	github.com/fumiama/go-base16384 v1.7.0
 	github.com/fumiama/go-registry v0.2.6
 	github.com/fumiama/unibase2n v0.0.0-20221020155353-02876e777430
@@ -32,6 +32,7 @@ require (
 	github.com/RomiChan/syncx v0.0.0-20221202055724-5f842c53020e // indirect
 	github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5 // indirect
 	github.com/blend/go-sdk v1.20220411.3 // indirect
+	github.com/corona10/goimagehash v1.1.0 // indirect
 	github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 // indirect
 	github.com/fumiama/cron v1.3.0 // indirect
 	github.com/fumiama/go-simple-protobuf v0.1.0 // indirect
@@ -45,6 +46,7 @@ require (
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/power-devops/perfstat v0.0.0-20210106213030-5aafc221ea8c // indirect

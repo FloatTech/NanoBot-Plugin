@@ -24,6 +24,8 @@ github.com/RomiChan/websocket v1.4.3-0.20220227141055-9b2c6168c9c5/go.mod h1:0Uc
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/blend/go-sdk v1.20220411.3 h1:GFV4/FQX5UzXLPwWV03gP811pj7B8J2sbuq+GJQofXc=
 github.com/blend/go-sdk v1.20220411.3/go.mod h1:7lnH8fTi6U4i1fArEXRyOIY2E1X4MALg09qsQqY1+ak=
+github.com/corona10/goimagehash v1.1.0 h1:teNMX/1e+Wn/AYSbLHX8mj+mF9r60R1kBeqE9MkoYwI=
+github.com/corona10/goimagehash v1.1.0/go.mod h1:VkvE0mLn84L4aF8vCb6mafVajEb6QYMHl2ZJLn0mOGI=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -36,8 +38,8 @@ github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4 h1:BBade+Jl
 github.com/ericpauley/go-quantize v0.0.0-20200331213906-ae555eb2afa4/go.mod h1:H7chHJglrhPPzetLdzBleF8d22WYOv7UM/lEKYiwlKM=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 h1:Yzb9+7DPaBjB8zlTR87/ElzFsnQfuHnVUVqpZZIcV5Y=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5/go.mod h1:a2zkGnVExMxdzMo3M0Hi/3sEU+cWnZpSni0O6/Yb/P0=
-github.com/fumiama/NanoBot v0.0.0-20231117141225-3c2b37d5d79d h1:3ITP7RVzbQGkqvXl7YMm36JPbzEzTvzXpMLulAfyMF8=
-github.com/fumiama/NanoBot v0.0.0-20231117141225-3c2b37d5d79d/go.mod h1:z9IDRRwntGIrnnxcwgjVge7lUa2GkGWFT7F1uYZbvh8=
+github.com/fumiama/NanoBot v0.0.0-20231122085036-99b256c0433b h1:Xx/4GYSE2vx0dmiMC09lZJAhr40bwlX+CaAY3kwq65c=
+github.com/fumiama/NanoBot v0.0.0-20231122085036-99b256c0433b/go.mod h1:z9IDRRwntGIrnnxcwgjVge7lUa2GkGWFT7F1uYZbvh8=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b h1:Zt3pFQditAdWTHCOVkiloc9ZauBoWrb37guFV4iIRvE=
 github.com/fumiama/bigfft v0.0.0-20211011143303-6e0bfa3c836b/go.mod h1:qqbHyh8v60DhA7CoWK5oRCqLrMHRGoxYCSS9EjAz6Eo=
 github.com/fumiama/cron v1.3.0 h1:ZWlwuexF+HQHl3cYytEE5HNwD99q+3vNZF1GrEiXCFo=
@@ -94,6 +96,8 @@ github.com/mattn/go-isatty v0.0.16 h1:bq3VjFmv/sOjHtdEhmkEV4x1AJtvUvOJ2PFAZ5+peK
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/mattn/go-sqlite3 v1.14.0 h1:mLyGNKR8+Vv9CAU7PphKa2hkEqxxhn8i32J6FPj1/QA=
 github.com/mattn/go-sqlite3 v1.14.0/go.mod h1:JIl7NbARA7phWnGvh0LKTyg7S9BA+6gx71ShQilpsus=
+github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
+github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646/go.mod h1:jpp1/29i3P1S/RLdc7JQKbRpFeM1dOBd8T9ki5s+AY8=
 github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58 h1:onHthvaw9LFnH4t2DcNVpwGmV9E1BkGknEliJkfwQj0=
 github.com/pbnjay/memory v0.0.0-20210728143218-7b4eea64cf58/go.mod h1:DXv8WO4yhMYhSNPKjeNKa5WY9YCIEBRbNzFFPJbWO6Y=
 github.com/pkg/diff v0.0.0-20210226163009-20ebb0f2a09e/go.mod h1:pJLUxLENpZxwdsKMEsNbx1VGcRFpLqf3715MtcvvzbA=
