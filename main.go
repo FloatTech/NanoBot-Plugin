@@ -61,6 +61,7 @@ func main() {
 	shardindex := flag.Uint("shardindex", 0, "shard index")
 	shardcount := flag.Uint("shardcount", 0, "shard count")
 	savecfg := flag.String("save", "", "save bot config to filename (eg. config.yaml)")
+	superallqqusers := flag.Bool("superallqq", false, "make all QQ users to be SuperUser")
 	flag.Parse()
 	if *help {
 		fmt.Println("Usage:")
@@ -80,6 +81,9 @@ func main() {
 	}
 
 	sus := make([]string, 0, 16)
+	if *superallqqusers {
+		sus = append(sus, nano.SuperUserAllQQUsers)
+	}
 	for _, s := range flag.Args() {
 		_, err := strconv.ParseInt(s, 10, 64)
 		if err != nil {
