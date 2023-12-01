@@ -25,6 +25,7 @@ import (
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/hyaku"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/manager"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/qqwife"
+	_ "github.com/FloatTech/NanoBot-Plugin/plugin/qunyou"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/runcode"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/score"
 	_ "github.com/FloatTech/NanoBot-Plugin/plugin/status"
