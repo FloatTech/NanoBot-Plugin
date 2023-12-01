@@ -13,7 +13,7 @@ import (
 
 func init() {
 	en := nano.Register("qunyou", &ctrl.Options[*nano.Ctx]{
-		DisableOnDefault: false,
+		DisableOnDefault: true,
 		Help:             "随机群友怪话\n- 看看群友",
 	})
 	en.OnMessagePrefix("看看群友").Limit(ctxext.LimitByGroup).Handle(func(ctx *nano.Ctx) {
